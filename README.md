@@ -39,6 +39,8 @@ Here are wireframes of the user stories:
 <img src='http://i.imgur.com/VIYsLvx.jpg' title='Barcode Album' width='' alt='Barcode Album' />
 <img src='http://i.imgur.com/jIec0mZ.jpg' title='Product Detailed' width='' alt='Product Detailed' />
 <img src='http://i.imgur.com/AvmcUDQ.jpg' title='Wishlist' width='' alt='Wishlist' />
+<img src='http://i.imgur.com/mya2qBQ.jpg' title='Cart' width='' alt='Cart' />
+<img src='http://i.imgur.com/Yv0LmF4.jpg' title='Payment' width='' alt='Payment' />
 <img src='http://i.imgur.com/v3K7dU5.jpg' title='Receipt' width='' alt='Receipt' />
 
 
