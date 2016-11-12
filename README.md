@@ -44,6 +44,7 @@ Here are wireframes of the user stories:
 <img src='http://i.imgur.com/v3K7dU5.jpg' title='Receipt' width='' alt='Receipt' />
 
 
+
 ## License
 
     Copyright [2016] [Kevin Lau, Patrick Alexis, Supratik Singha]
