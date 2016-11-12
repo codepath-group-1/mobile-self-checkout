@@ -18,7 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Items.db";
     public static final String ITEMS_TABLE_NAME = "ItemsTable";
 
-    // Column Namea
+    // Column Names
     public static final String COLUMN_ITEM_CODE = "item_code";
     public static final String COLUMN_ITEM_NAME = "item_name";
     public static final String COLUMN_ITEM_DESCRIPTION = "item_description";
