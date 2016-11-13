@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_product_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context="com.codepath.shopmyself.ProductDetailsActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_widthPercent="50%"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:id="@+id/ivItemImage" />
+
+    <TextView
+        android:text="Item Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_widthPercent="70%"
+        android:layout_below="@+id/ivItemImage"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:id="@+id/tvTitle"
+        android:textAlignment="center" />
+
+    <TextView
+        android:text="Item price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:id="@+id/tvPrice"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center" />
+
+    <View
+        android:id="@+id/vwSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tvPrice"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/darker_gray" />
+
+    <Button
+        android:text="Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/vwSeparator"
+        android:id="@+id/bnCancel" />
+
+    <Button
+        android:text="Add to Cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/bnCancel"
+        android:layout_alignTop="@id/bnCancel"
+        android:layout_alignParentRight="true"
+        android:id="@+id/bnCart" />
+
+    <Button
+        android:text="Add to Wishlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bnCart"
+        android:layout_toRightOf="@id/bnCancel"
+        android:layout_alignParentRight="true"
+        android:id="@+id/bnWishlist" />
+
+</android.support.percent.PercentRelativeLayout>

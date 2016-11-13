@@ -12,9 +12,13 @@
     tools:context="com.codepath.shopmyself.MainActivityFragment"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
 
+    <Button
+        android:text="Launch Detail Activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btnLaunchDetail"
+        android:onClick="onClickLaunchDetailActivity"/>
 </RelativeLayout>

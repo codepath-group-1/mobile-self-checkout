@@ -1,13 +1,17 @@
 package com.codepath.shopmyself.Database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.codepath.shopmyself.Models.Items;
+
 /**
  * Created by supsingh on 11/11/2016.
+ * Currently unused. Will delete if not needed
  */
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -94,5 +98,21 @@ public class DBHelper extends SQLiteOpenHelper {
             res.moveToNext();
             pos++;
         }
+    }
+
+
+    public boolean insertItem(Items item) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ITEM_CODE, item.getItem_code());
+        values.put(COLUMN_ITEM_NAME, item.getItem_name());
+        values.put(COLUMN_ITEM_DESCRIPTION, item.getItem_description());
+        values.put(COLUMN_ITEM_MANUFACTURER, item.getItem_manufacturer());
+        values.put(COLUMN_ITEM_PRICE, item.getItem_price());
+
+        db.insert(ITEMS_TABLE_NAME, null, values);
+
+        if (print_db) printTable(db);
+        return true;
     }
 }

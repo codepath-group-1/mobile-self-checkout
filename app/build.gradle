@@ -45,4 +45,20 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
         transitive = true;
     }
+
+    // Percent Library
+    compile 'com.android.support:percent:24.2.0'
+
+    // Picasso
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'jp.wasabeef:picasso-transformations:2.1.0'
+
+    // HTTP Client
+    compile 'com.loopj.android:android-async-http:1.4.9'
+
+    // Firebase
+    compile 'com.google.firebase:firebase-database:9.8.0'
 }
+
+// Firebase
+apply plugin: 'com.google.gms.google-services'
