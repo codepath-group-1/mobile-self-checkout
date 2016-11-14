@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setOrientationLocked(false)
                   .setCaptureActivity(CustomScannerActivity.class)
+                  .setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES)
                   .initiateScan();
     }
 
