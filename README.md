@@ -19,6 +19,7 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
+* [ ] User can turn on flashlight on and off during barcode scan.
 * [ ] User can view history (a list) of previously scanned barcodes and select them as the scanned product.
   * [ ] When item is selected, user is taken to the detailed screen of the item.
 * [ ] User can select an image of a barcode from their image gallery.
