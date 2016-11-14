@@ -5,8 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
@@ -21,14 +22,14 @@ implements DecoratedBarcodeView.TorchListener {
 
     private CaptureManager capture;
     private DecoratedBarcodeView barcodeScannerView;
-    private Button switchFlashlightButton;
+    private MenuItem switchFlashlightMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_scanner);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -36,17 +37,33 @@ implements DecoratedBarcodeView.TorchListener {
             (DecoratedBarcodeView)findViewById(R.id.zxing_barcode_scanner);
         barcodeScannerView.setTorchListener(this);
 
-        switchFlashlightButton = (Button)findViewById(R.id.switch_flashlight);
-
-        // if the device does not have flashlight in its camera,
-        // then remove the switch flashlight button...
-        if (!hasFlash()) {
-            switchFlashlightButton.setVisibility(View.GONE);
-        }
-
         capture = new CaptureManager(this, barcodeScannerView);
         capture.initializeFromIntent(getIntent(), savedInstanceState);
         capture.decode();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_custom_scanner, menu);
+
+        switchFlashlightMenuItem = menu.findItem(R.id.action_flashlight);
+        if (!hasFlash()) {
+            switchFlashlightMenuItem.setVisible(false);
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_flashlight) {
+            switchFlashlight(null);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -91,11 +108,12 @@ implements DecoratedBarcodeView.TorchListener {
      */
     private boolean hasFlash() {
         return getApplicationContext().getPackageManager()
-                .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+               .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
     }
 
     public void switchFlashlight(View view) {
-        if (getString(R.string.turn_on_flashlight).equals(switchFlashlightButton.getText())) {
+        if (getString(R.string.turn_on_flashlight)
+            .equals(switchFlashlightMenuItem.getTitle())) {
             barcodeScannerView.setTorchOn();
         } else {
             barcodeScannerView.setTorchOff();
@@ -104,11 +122,15 @@ implements DecoratedBarcodeView.TorchListener {
 
     @Override
     public void onTorchOn() {
-        switchFlashlightButton.setText(R.string.turn_off_flashlight);
+        switchFlashlightMenuItem.setTitle(R.string.turn_off_flashlight);
+        switchFlashlightMenuItem
+        .setIcon(R.drawable.ic_action_turn_off_flashlight);
     }
 
     @Override
     public void onTorchOff() {
-        switchFlashlightButton.setText(R.string.turn_on_flashlight);
+        switchFlashlightMenuItem.setTitle(R.string.turn_on_flashlight);
+        switchFlashlightMenuItem
+        .setIcon(R.drawable.ic_action_turn_on_flashlight);
     }
 }
