@@ -1,5 +1,9 @@
 package com.codepath.shopmyself.Models;
 
+import android.database.Cursor;
+
+import com.codepath.shopmyself.Database.DBHelper;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,23 +38,37 @@ public class Items {
         return item_image_url;
     }
 
+    public int getItem_quantity() {
+        return item_quantity;
+    }
+
     long item_code;
     String item_name;
     String item_description;
     String item_manufacturer;
     double item_price;
     String item_image_url;
+    int item_quantity;
 
     public Items() {
-
     }
-    public Items(long item_code, String item_name, String item_description, String item_manufacturer, double item_price, String item_image_url) {
+    public Items(Cursor res) {
+        this.item_code = res.getLong(res.getColumnIndex(DBHelper.COLUMN_ITEM_CODE));
+        this.item_name = res.getString(res.getColumnIndex(DBHelper.COLUMN_ITEM_NAME));
+        this.item_description = res.getString(res.getColumnIndex(DBHelper.COLUMN_ITEM_DESCRIPTION));
+        this.item_manufacturer = res.getString(res.getColumnIndex(DBHelper.COLUMN_ITEM_MANUFACTURER));
+        this.item_price = res.getDouble(res.getColumnIndex(DBHelper.COLUMN_ITEM_PRICE));
+        this.item_image_url = res.getString(res.getColumnIndex(DBHelper.COLUMN_ITEM_IMAGEURL));
+        this.item_quantity = res.getInt(res.getColumnIndex(DBHelper.COLUMN_ITEM_QUANTITY));
+    }
+    public Items(long item_code, String item_name, String item_description, String item_manufacturer, double item_price, String item_image_url, int item_quantity) {
         this.item_code = item_code;
         this.item_name = item_name;
         this.item_description = item_description;
         this.item_manufacturer = item_manufacturer;
         this.item_price = item_price;
         this.item_image_url = item_image_url;
+        this.item_quantity = item_quantity;
     }
 
     @Override
@@ -62,6 +80,7 @@ public class Items {
                 ", item_manufacturer='" + item_manufacturer + '\'' +
                 ", item_price=" + item_price +
                 ", item_image_url='" + item_image_url + '\'' +
+                ", item_quantity='" + item_quantity + '\'' +
                 '}';
     }
 
@@ -85,6 +104,4 @@ public class Items {
 
         return newItem;
     }
-
-
 }
