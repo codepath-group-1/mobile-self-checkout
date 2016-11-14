@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.zxing.integration.android.IntentIntegrator;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -61,5 +62,12 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(MainActivity.this, ProductDetailsActivity.class);
         i.putExtra("upc", upc);
         startActivity(i);
+    }
+
+    public void scanCustomScanner(View view) {
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setOrientationLocked(false)
+                  .setCaptureActivity(CustomScannerActivity.class)
+                  .initiateScan();
     }
 }

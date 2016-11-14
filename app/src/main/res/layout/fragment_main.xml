@@ -18,7 +18,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:id="@+id/btnLaunchDetail"
         android:onClick="onClickLaunchDetailActivity"/>
+
+    <Button
+        android:text="Launch Custom Scanner Activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnLaunchDetail"
+        android:id="@+id/btnLaunchCustomScanner"
+        android:onClick="scanCustomScanner"/>
 </RelativeLayout>
