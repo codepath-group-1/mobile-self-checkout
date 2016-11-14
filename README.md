@@ -10,6 +10,12 @@ The following **required** functionality is completed:
 * [ ] When barcode is scanned, user is taken to a detailed screen of the item.
   * [ ] Item is shown with title, image, and a short description.
   * [ ] User can add to wishlist, cart, or cancel.
+  * [ ] When adding to wishlist, user is taken to the wishlist screen.
+    * [ ] Item is not added if it already exists in wishlist.
+  * [ ] When adding to the cart, user is taken to the cart screen.
+    * [ ] Item is not added if it already exists in cart.
+* [ ] User can keep a list of items in the wishlist.
+  * [ ] User can click on item in the wishlist and be taken to the detailed screen of the item.
 * [ ] User can keep a list of items in the cart.
   * [ ] User can change quantity of each item by entering number.
 * [ ] User can click on checkout from the cart screen to get to the payment screen.
