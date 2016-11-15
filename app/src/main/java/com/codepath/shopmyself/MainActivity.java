@@ -21,6 +21,7 @@ import io.fabric.sdk.android.Fabric;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    long upc = 38000786693L;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickLaunchDetailActivity (View v) {
-        long upc = 38000786693L;
         Intent i = new Intent(MainActivity.this, ProductDetailsActivity.class);
         i.putExtra("upc", upc);
         startActivity(i);
@@ -91,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Scanned");
                 Toast.makeText(this, "Scanned: " + result.getContents(),
                                Toast.LENGTH_LONG).show();
+                Log.d("SCANNED: ", result.getContents());
+                upc = Long.valueOf(result.getContents());
             }
         } else {
             // This is important, otherwise the result will not be passed to the
