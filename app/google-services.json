@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "30596207004",
-    "firebase_url": "https://shop-myself.firebaseio.com",
-    "project_id": "shop-myself",
-    "storage_bucket": "shop-myself.appspot.com"
+    "project_number": "242725934612",
+    "firebase_url": "https://shopmyself-50188.firebaseio.com",
+    "project_id": "shopmyself-50188",
+    "storage_bucket": "shopmyself-50188.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:30596207004:android:c6b8b833da3ba439",
+        "mobilesdk_app_id": "1:242725934612:android:c6b8b833da3ba439",
         "android_client_info": {
           "package_name": "com.codepath.shopmyself"
         }
       },
       "oauth_client": [
         {
-          "client_id": "30596207004-nql5h28g9o05pnau19ebjna166scvvv0.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.codepath.shopmyself",
-            "certificate_hash": "51115F3456D550AFAB48CF33E299F7CC5E5FBD85"
-          }
-        },
-        {
-          "client_id": "30596207004-om27inepdtrfkrhge2vd90tdes549kpt.apps.googleusercontent.com",
+          "client_id": "242725934612-7fe4ln3od2pqp11kisluelaes59g89ip.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDHh_-ycF9iDQNhswB925PUlix41OFpDEQ"
+          "current_key": "AIzaSyAiiNruPx2A2Y1vmaWEVLGIsvMW8Kh9KeQ"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "30596207004-om27inepdtrfkrhge2vd90tdes549kpt.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

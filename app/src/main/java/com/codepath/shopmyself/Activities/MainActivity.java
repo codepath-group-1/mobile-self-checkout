@@ -1,4 +1,4 @@
-package com.codepath.shopmyself;
+package com.codepath.shopmyself.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.codepath.shopmyself.R;
 import com.crashlytics.android.Crashlytics;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -23,10 +26,25 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     long upc = 38000786693L;
 
+    private final int REQUEST_CODE = 20;
+
+    // Firebase instance variables
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
+
+        // Initialize Firebase Auth
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        if (mFirebaseUser == null) {
+            // Not signed in, launch the Email password activity
+            startActivityForResult(new Intent(this, EmailPasswordActivity.class), REQUEST_CODE);
+        }
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -80,24 +98,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
-        IntentResult result =
-                IntentIntegrator
-                .parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
-            if(result.getContents() == null) {
-                Log.d(TAG, "Cancelled scan");
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+
+        // REQUEST_CODE is defined above
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+
+            IntentResult result =
+                    IntentIntegrator
+                            .parseActivityResult(requestCode, resultCode, data);
+            if(result != null) {
+                if(result.getContents() == null) {
+                    Log.d(TAG, "Cancelled scan");
+                    Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                } else {
+                    Log.d(TAG, "Scanned");
+                    Toast.makeText(this, "Scanned: " + result.getContents(),
+                            Toast.LENGTH_LONG).show();
+                    Log.d("SCANNED: ", result.getContents());
+                    upc = Long.valueOf(result.getContents());
+                }
             } else {
-                Log.d(TAG, "Scanned");
-                Toast.makeText(this, "Scanned: " + result.getContents(),
-                               Toast.LENGTH_LONG).show();
-                Log.d("SCANNED: ", result.getContents());
-                upc = Long.valueOf(result.getContents());
+                // This is important, otherwise the result will not be passed to the
+                // fragment.
+                super.onActivityResult(requestCode, resultCode, data);
             }
-        } else {
-            // This is important, otherwise the result will not be passed to the
-            // fragment.
-            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 }

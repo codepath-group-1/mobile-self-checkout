@@ -1,4 +1,4 @@
-package com.codepath.shopmyself;
+package com.codepath.shopmyself.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,9 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.codepath.shopmyself.HTTPClient;
 import com.codepath.shopmyself.Models.Items;
+import com.codepath.shopmyself.R;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 

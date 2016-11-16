@@ -1,4 +1,4 @@
-package com.codepath.shopmyself;
+package com.codepath.shopmyself.Activities;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.codepath.shopmyself.R;
 import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
