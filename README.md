@@ -38,8 +38,7 @@ The following **optional** features are implemented:
 
 ## Gif
 
-<img src='https://github.com/codepath-group-1/shop-myself/blob/master/shopmyself1.gif
-' title='Shop Myself Gif' width='' alt='Shop Myself Gif' />
+<img src='https://github.com/codepath-group-1/shop-myself/blob/master/shopmyself1.gif' title='Shop Myself Gif' width='' alt='Shop Myself Gif' />
 ## Wireframes
 
 Here are wireframes of the user stories:
