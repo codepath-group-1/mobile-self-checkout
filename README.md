@@ -6,7 +6,7 @@
 
 The following **required** functionality is completed:
 
-* [ ] User can scan a barcode.
+* [X] User can scan a barcode.
 * [ ] When barcode is scanned, user is taken to a detailed screen of the item.
   * [ ] Item is shown with title, image, and a short description.
   * [ ] User can add to wishlist, cart, or cancel.
@@ -36,7 +36,10 @@ The following **optional** features are implemented:
 * [ ] User can see a history of orders made.
 * [ ] User can save payment information.
 
+## Gif
 
+<img src='https://github.com/codepath-group-1/shop-myself/blob/master/shopmyself1.gif
+' title='Shop Myself Gif' width='' alt='Shop Myself Gif' />
 ## Wireframes
 
 Here are wireframes of the user stories:
