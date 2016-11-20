@@ -99,8 +99,7 @@ implements DecoratedBarcodeView.TorchListener {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return barcodeScannerView.onKeyDown(keyCode, event) ||
-               super.onKeyDown(keyCode, event);
+        return barcodeScannerView.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
     }
 
     /**
@@ -108,13 +107,11 @@ implements DecoratedBarcodeView.TorchListener {
      * @return true if there is Flashlight, otherwise false.
      */
     private boolean hasFlash() {
-        return getApplicationContext().getPackageManager()
-               .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+        return getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
     }
 
     public void switchFlashlight(View view) {
-        if (getString(R.string.turn_on_flashlight)
-            .equals(switchFlashlightMenuItem.getTitle())) {
+        if (getString(R.string.turn_on_flashlight).equals(switchFlashlightMenuItem.getTitle())) {
             barcodeScannerView.setTorchOn();
         } else {
             barcodeScannerView.setTorchOff();
@@ -124,14 +121,12 @@ implements DecoratedBarcodeView.TorchListener {
     @Override
     public void onTorchOn() {
         switchFlashlightMenuItem.setTitle(R.string.turn_off_flashlight);
-        switchFlashlightMenuItem
-        .setIcon(R.drawable.ic_action_turn_off_flashlight);
+        switchFlashlightMenuItem.setIcon(R.drawable.ic_action_turn_off_flashlight);
     }
 
     @Override
     public void onTorchOff() {
         switchFlashlightMenuItem.setTitle(R.string.turn_on_flashlight);
-        switchFlashlightMenuItem
-        .setIcon(R.drawable.ic_action_turn_on_flashlight);
+        switchFlashlightMenuItem.setIcon(R.drawable.ic_action_turn_on_flashlight);
     }
 }

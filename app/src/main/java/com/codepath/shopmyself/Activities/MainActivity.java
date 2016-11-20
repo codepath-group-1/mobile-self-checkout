@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        if (mFirebaseUser == null) {
+        if (false && mFirebaseUser == null) { // sup: revert
             // Not signed in, launch the Email password activity
             startActivityForResult(new Intent(this, EmailPasswordActivity.class), REQUEST_CODE);
         }
@@ -82,9 +82,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickLaunchDetailActivity (View v) {
+        launchDetailActivity();
+    }
+
+    public void launchDetailActivity() {
         Intent i = new Intent(MainActivity.this, ProductDetailsActivity.class);
         i.putExtra("upc", upc);
         startActivity(i);
+
     }
 
     public void scanCustomScanner(View view) {
@@ -100,25 +105,21 @@ public class MainActivity extends AppCompatActivity {
                                     Intent data) {
 
         // REQUEST_CODE is defined above
-        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+        if (resultCode == RESULT_OK) {
 
-            IntentResult result =
-                    IntentIntegrator
-                            .parseActivityResult(requestCode, resultCode, data);
+            IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
             if(result != null) {
                 if(result.getContents() == null) {
                     Log.d(TAG, "Cancelled scan");
                     Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
                 } else {
-                    Log.d(TAG, "Scanned");
-                    Toast.makeText(this, "Scanned: " + result.getContents(),
-                            Toast.LENGTH_LONG).show();
-                    Log.d("SCANNED: ", result.getContents());
                     upc = Long.valueOf(result.getContents());
+                    Log.d("SCANNED: ", "upc: " + upc);
+                    Toast.makeText(this, "Scanned: " + upc, Toast.LENGTH_LONG).show();
+                    launchDetailActivity();
                 }
             } else {
-                // This is important, otherwise the result will not be passed to the
-                // fragment.
+                Log.d(TAG, "Scan ERROR");
                 super.onActivityResult(requestCode, resultCode, data);
             }
         }
