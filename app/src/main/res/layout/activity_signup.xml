@@ -37,7 +37,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
 
-            <EditText android:id="@+id/emailField"
+            <EditText android:id="@+id/email_sign_up_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -46,7 +46,7 @@
 
             </EditText>
 
-            <EditText android:id="@+id/passwordField"
+            <EditText android:id="@+id/password_sign_up_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

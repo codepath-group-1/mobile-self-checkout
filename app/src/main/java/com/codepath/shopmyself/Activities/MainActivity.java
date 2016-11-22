@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         if (mFirebaseUser == null) {
-            // Not signed in, launch the Email password activity
-            startActivityForResult(new Intent(this, EmailPasswordActivity.class), REQUEST_CODE);
+            // Not logged in, launch the Log In activity
+            loadLogInView();
         }
 
         setContentView(R.layout.activity_main);
@@ -59,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //will load login activity if user is not logged in
+    private void loadLogInView() {
+        Intent intent = new Intent(this, EmailPasswordActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -73,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        //if user signs out
+        if (id == R.id.action_logout) {
             return true;
         }
 
