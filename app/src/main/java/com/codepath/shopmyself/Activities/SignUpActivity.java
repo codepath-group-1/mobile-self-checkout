@@ -94,6 +94,9 @@ public class SignUpActivity extends AppCompatActivity {
                         if (!task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, R.string.auth_failed,
                                     Toast.LENGTH_SHORT).show();
+                        }  else {
+                            //sign in was successful
+                            finish();
                         }
 
                     }
