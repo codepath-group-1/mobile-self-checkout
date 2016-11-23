@@ -12,6 +12,7 @@ apply plugin: 'io.fabric'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
+    jcenter()
 }
 
 
@@ -60,7 +61,11 @@ dependencies {
     compile 'com.google.firebase:firebase-database:9.8.0'
     compile 'com.google.firebase:firebase-auth:9.8.0'
 
+    // Add Comment Please
     compile 'com.journeyapps:zxing-android-embedded:3.4.0'
+
+    // Swipe Card
+    compile 'in.arjsna:swipecardlib:1.0.2'
 }
 
 // Firebase

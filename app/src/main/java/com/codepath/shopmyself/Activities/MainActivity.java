@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        if (false && mFirebaseUser == null) { // sup: revert
+        if (mFirebaseUser == null) { // sup: revert
             // Not signed in, launch the Email password activity
             startActivityForResult(new Intent(this, EmailPasswordActivity.class), REQUEST_CODE);
         }
