@@ -28,4 +28,5 @@
         android:layout_below="@+id/btnLaunchDetail"
         android:id="@+id/btnLaunchCustomScanner"
         android:onClick="scanCustomScanner"/>
+    
 </RelativeLayout>
