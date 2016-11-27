@@ -135,9 +135,16 @@ public class EmailPasswordActivity extends AppCompatActivity {
                             AlertDialog dialog = builder.create();
                             dialog.show();
                         } else {
-                            //sign in was successful
-                            setResult(RESULT_OK);
-                            finish();
+                            Intent loginSuccessful
+                                = new Intent(EmailPasswordActivity.this,
+                                             MainActivity.class);
+                            loginSuccessful
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                            loginSuccessful
+                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                            startActivity(loginSuccessful);
                         }
                         
                     }
