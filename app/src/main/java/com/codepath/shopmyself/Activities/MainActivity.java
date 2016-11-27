@@ -83,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
 
         //if user signs out
         if (id == R.id.action_logout) {
-            return true;
+            mFirebaseAuth.signOut();
+            loadLogInView();
         }
 
         return super.onOptionsItemSelected(item);
