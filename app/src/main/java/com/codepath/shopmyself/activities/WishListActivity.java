@@ -1,4 +1,4 @@
-package com.codepath.shopmyself.Activities;
+package com.codepath.shopmyself.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.codepath.shopmyself.Models.Item;
+import com.codepath.shopmyself.models.Item;
 import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.adapters.WishListArrayAdapter;
 import com.google.firebase.auth.FirebaseAuth;

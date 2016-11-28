@@ -1,8 +1,8 @@
-package com.codepath.shopmyself.Models;
+package com.codepath.shopmyself.models;
 
 import android.database.Cursor;
 
-import com.codepath.shopmyself.Database.DBHelper;
+import com.codepath.shopmyself.database.DBHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.codepath.shopmyself.Models.Item;
+import com.codepath.shopmyself.models.Item;
 import com.codepath.shopmyself.R;
 import com.squareup.picasso.Picasso;
 

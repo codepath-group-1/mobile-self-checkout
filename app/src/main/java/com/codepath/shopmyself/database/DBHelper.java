@@ -1,4 +1,4 @@
-package com.codepath.shopmyself.Database;
+package com.codepath.shopmyself.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.codepath.shopmyself.Models.Item;
+import com.codepath.shopmyself.models.Item;
 
 import java.util.ArrayList;
 
