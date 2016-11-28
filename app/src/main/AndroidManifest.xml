@@ -31,8 +31,9 @@
         <activity android:name=".activities.ProductDetailsActivity"/>
         <activity android:name=".activities.EmailPasswordActivity"/>
         <activity android:name=".activities.SignUpActivity"/>
-        <activity android:name=".activities.WishListActivity">
-        </activity>
+        <activity
+            android:name=".activities.WishListActivity"
+            android:label="@string/title_activity_wish_list"/>
     </application>
 
 </manifest>
