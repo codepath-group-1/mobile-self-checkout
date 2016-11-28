@@ -19,7 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Activities.CustomScannerActivity"
             android:label="@string/title_activity_scan_barcode"
@@ -32,6 +31,8 @@
         <activity android:name=".Activities.ProductDetailsActivity"/>
         <activity android:name=".Activities.EmailPasswordActivity"/>
         <activity android:name=".Activities.SignUpActivity"/>
+        <activity android:name=".Activities.WishListActivity">
+        </activity>
     </application>
 
 </manifest>
