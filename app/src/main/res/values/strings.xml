@@ -24,5 +24,6 @@
     <string name="shop_myself_name">Shop Myself</string>
     <string name="sign_up_button_label">Sign up</string>
     <string name="wish_list_item_image">Wish List Item Image</string>
+    <string name="add_to_cart">ADD TO CART</string>
 
 </resources>

@@ -21,9 +21,19 @@
         android:id="@+id/tvWishListItemName"
         android:gravity="center"
         android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/ivWishListItemImage"
+        android:layout_toLeftOf="@+id/btnAddToCart"
+        android:layout_toStartOf="@+id/btnAddToCart"
         android:layout_toRightOf="@+id/ivWishListItemImage"
+        android:layout_toEndOf="@+id/ivWishListItemImage"/>
+
+    <Button
+        android:text="@string/add_to_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAddToCart"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/ivWishListItemImage"/>
+        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

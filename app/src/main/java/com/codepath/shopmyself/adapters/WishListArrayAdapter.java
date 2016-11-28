@@ -6,11 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.codepath.shopmyself.models.Item;
 import com.codepath.shopmyself.R;
+import com.codepath.shopmyself.models.Item;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class WishListArrayAdapter extends ArrayAdapter<Item> {
     private static class ViewHolder {
         ImageView ivWishListItemImage;
         TextView tvWishListItemName;
+        Button btnAddToCart;
     }
 
     public WishListArrayAdapter(Context context, List<Item> wishList) {
@@ -45,6 +47,9 @@ public class WishListArrayAdapter extends ArrayAdapter<Item> {
             viewHolder.tvWishListItemName
                     = (TextView)convertView
                       .findViewById(R.id.tvWishListItemName);
+            viewHolder.btnAddToCart
+                    = (Button)convertView
+                      .findViewById(R.id.btnAddToCart);
 
             convertView.setTag(viewHolder);
         } else {
@@ -58,6 +63,15 @@ public class WishListArrayAdapter extends ArrayAdapter<Item> {
                .into(viewHolder.ivWishListItemImage);
 
         viewHolder.tvWishListItemName.setText(wishListItem.getItem_name());
+
+        viewHolder.btnAddToCart.setTag(wishListItem);
+        viewHolder.btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Item wishListItem = (Item)view.getTag();
+                wishListItem.addToFirebaseCart();
+            }
+        });
 
         return convertView;
     }
