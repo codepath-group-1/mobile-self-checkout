@@ -55,17 +55,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             mUserId = mFirebaseUser.getUid();
 
+            //launch the scanner
+            onCustomScanner();
         }
 
     }
 
-    //will load login activity if user is not logged in
-    private void loadLogInView() {
-        Intent intent = new Intent(this, EmailPasswordActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivityForResult(intent, REQUEST_CODE);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,13 +85,22 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //will load login activity if user is not logged in
+    private void loadLogInView() {
+        Intent intent = new Intent(this, EmailPasswordActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
+
     public void onClickLaunchDetailActivity (View v) {
         Intent i = new Intent(MainActivity.this, ProductDetailsActivity.class);
         i.putExtra("upc", upc);
         startActivity(i);
     }
 
-    public void scanCustomScanner(View view) {
+    public void onCustomScanner() {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setOrientationLocked(false)
                   .setCaptureActivity(CustomScannerActivity.class)
@@ -124,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                     Log.d("SCANNED: ", result.getContents());
                     upc = Long.valueOf(result.getContents());
+                    Toast.makeText(getApplicationContext(), String.valueOf(upc), Toast.LENGTH_LONG).show();
                 }
             } else {
                 // This is important, otherwise the result will not be passed to the
