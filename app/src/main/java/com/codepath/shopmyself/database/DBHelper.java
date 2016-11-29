@@ -1,4 +1,4 @@
-package com.codepath.shopmyself.Database;
+package com.codepath.shopmyself.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.codepath.shopmyself.Models.Items;
+import com.codepath.shopmyself.models.Item;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private final boolean print_db = false;
 
     // Dtaabase Name, Table Name
-    public static final String DATABASE_NAME = "Items.db";
+    public static final String DATABASE_NAME = "Item.db";
     public static final String ITEMS_TABLE_NAME = "ItemsTable";
 
     // Column Names
@@ -90,20 +90,20 @@ public class DBHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public ArrayList<Items> getAllItems() {
-        ArrayList<Items> items_list = new ArrayList();
+    public ArrayList<Item> getAllItems() {
+        ArrayList<Item> item_list = new ArrayList();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = getAllData(db);
         res.moveToFirst();
 
         while (res.isAfterLast() == false) {
-            items_list.add(new Items(res));
+            item_list.add(new Item(res));
             res.moveToNext();
         }
 
         if (print_db) printTable(db);
-        return items_list;
+        return item_list;
     }
 
     public void printTable(SQLiteDatabase db) {
@@ -140,7 +140,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean insertItem(Items item) {
+    public boolean insertItem(Item item) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_ITEM_CODE, item.getItem_code());

@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.codepath.shopmyself.Fragments.MainActivityFragment"
+    tools:context="com.codepath.shopmyself.fragments.MainActivityFragment"
     tools:showIn="@layout/activity_main">
 
 
@@ -25,7 +25,19 @@
         android:text="Launch Custom Scanner Activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnLaunchDetail"
         android:id="@+id/btnLaunchCustomScanner"
-        android:onClick="scanCustomScanner"/>
+        android:onClick="scanCustomScanner"
+        android:layout_below="@+id/btnLaunchDetail"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:text="Launch Wish List Activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnLaunchWishList"
+        android:onClick="wishList"
+        android:layout_below="@+id/btnLaunchCustomScanner"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 </RelativeLayout>

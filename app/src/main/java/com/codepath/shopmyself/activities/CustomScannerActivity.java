@@ -1,4 +1,4 @@
-package com.codepath.shopmyself.Activities;
+package com.codepath.shopmyself.activities;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;

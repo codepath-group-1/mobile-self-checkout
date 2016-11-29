@@ -1,9 +1,7 @@
-package com.codepath.shopmyself.Activities;
+package com.codepath.shopmyself.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,6 +14,8 @@ import com.codepath.shopmyself.R;
 import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -26,37 +26,42 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     long upc = 38000786693L;
 
-    private final int REQUEST_CODE = 20;
-
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+
+    private DatabaseReference mDatabase;
+    private String mUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
 
-        // Initialize Firebase Auth
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        if (mFirebaseUser == null) { // sup: revert
-            // Not signed in, launch the Email password activity
-            startActivityForResult(new Intent(this, EmailPasswordActivity.class), REQUEST_CODE);
-        }
-
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        // Initialize Firebase Auth
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        if (mFirebaseUser == null) {
+            // Not logged in, launch the Log In activity
+            loadLogInView();
+        } else {
+            mUserId = mFirebaseUser.getUid();
+        }
+
+    }
+
+    //will load login activity if user is not logged in
+    private void loadLogInView() {
+        Intent intent = new Intent(this, EmailPasswordActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     @Override
@@ -73,9 +78,10 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        //if user signs out
+        if (id == R.id.action_logout) {
+            mFirebaseAuth.signOut();
+            loadLogInView();
         }
 
         return super.onOptionsItemSelected(item);
@@ -100,19 +106,29 @@ public class MainActivity extends AppCompatActivity {
                   .initiateScan();
     }
 
+    public void wishList(View view) {
+        Intent wishListIntent = new Intent(MainActivity.this,
+                                           WishListActivity.class);
+        startActivity(wishListIntent);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
-
-        // REQUEST_CODE is defined above
-        if (resultCode == RESULT_OK) {
-
-            IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK &&
+            requestCode == IntentIntegrator.REQUEST_CODE) {
+            IntentResult result
+                = IntentIntegrator
+                  .parseActivityResult(requestCode, resultCode, data);
             if(result != null) {
                 if(result.getContents() == null) {
                     Log.d(TAG, "Cancelled scan");
                     Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
                 } else {
+                    String scannedMessage = "Scanned: " + result.getContents();
+                    Log.d(TAG, scannedMessage);
+                    Toast.makeText(this, scannedMessage,
+                                   Toast.LENGTH_LONG).show();
                     upc = Long.valueOf(result.getContents());
                     Log.d("SCANNED: ", "upc: " + upc);
                     Toast.makeText(this, "Scanned: " + upc, Toast.LENGTH_LONG).show();

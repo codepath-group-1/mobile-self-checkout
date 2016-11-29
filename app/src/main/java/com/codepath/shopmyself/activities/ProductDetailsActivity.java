@@ -1,4 +1,4 @@
-package com.codepath.shopmyself.Activities;
+package com.codepath.shopmyself.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.shopmyself.HTTPClient;
-import com.codepath.shopmyself.Models.Items;
+import com.codepath.shopmyself.models.Item;
 import com.codepath.shopmyself.R;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
@@ -22,7 +22,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private final String TAG = "sup:";
     HTTPClient client;
-    Items newItem;
+    Item newItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                newItem = Items.fromJSON(response);
+                newItem = Item.fromJSON(response);
                 Log.d(TAG, "item: " + newItem.toString());
                 renderOnFragment(newItem);
                 super.onSuccess(statusCode, headers, response);
@@ -60,7 +60,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void renderOnFragment(Items newItem) {
+    private void renderOnFragment(Item newItem) {
         ImageView ivItemImage = (ImageView) findViewById(R.id.ivItemImage);
         TextView tvTitle = (TextView) findViewById(R.id.tvTitle);
         TextView tvPrice = (TextView) findViewById(R.id.tvPrice);

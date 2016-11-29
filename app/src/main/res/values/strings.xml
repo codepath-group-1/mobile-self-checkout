@@ -19,6 +19,10 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="auth_failed">Authentication failed</string>
+    <string name="signup_failed">Signup Failed</string>
     <string name="shop_logo">ShopMyself logo</string>
+    <string name="shop_myself_name">Shop Myself</string>
+    <string name="sign_up_button_label">Sign up</string>
+    <string name="wish_list_item_image">Wish List Item Image</string>
 
 </resources>
