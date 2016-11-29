@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_border"
+        android:layout_centerHorizontal="true"
+        app:layout_widthPercent="70%">
+
+    <ImageView
+        android:id="@+id/ivSwipeItemImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <TextView
+        android:text="Item Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivSwipeItemImage"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:id="@+id/tvSwipeTitle"
+        android:textAlignment="center" />
+
+    <TextView
+        android:text="Item price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvSwipeTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:id="@+id/tvSwipePrice"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
