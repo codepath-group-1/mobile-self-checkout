@@ -6,9 +6,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.codepath.shopmyself.models.Item;
 import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.adapters.WishListArrayAdapter;
+import com.codepath.shopmyself.models.Item;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
