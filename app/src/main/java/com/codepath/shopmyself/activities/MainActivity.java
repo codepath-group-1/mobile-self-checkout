@@ -98,6 +98,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void paymentDetails (View v) {
+        Intent i = new Intent(MainActivity.this, PaymentDetailsActivity.class);
+        startActivity(i);
+    }
+
     public void scanCustomScanner(View view) {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setOrientationLocked(false)

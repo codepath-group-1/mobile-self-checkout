@@ -7,19 +7,19 @@
 The following **required** functionality is completed:
 
 * [X] User can scan a barcode.
-* [ ] When barcode is scanned, user is taken to a detailed screen of the item.
-  * [ ] Item is shown with title, image, and a short description.
-  * [ ] User can add to wishlist, cart, or cancel.
+* [x] When barcode is scanned, user is taken to a detailed screen of the item.
+  * [x] Item is shown with title, image, and a short description.
+  * [x] User can add to wishlist, cart, or cancel.
   * [ ] When adding to wishlist, user is taken to the wishlist screen.
     * [ ] Item is not added if it already exists in wishlist.
   * [ ] When adding to the cart, user is taken to the cart screen.
     * [ ] Item is not added if it already exists in cart.
-* [ ] User can keep a list of items in the wishlist.
+* [x] User can keep a list of items in the wishlist.
   * [ ] User can click on item in the wishlist and be taken to the detailed screen of the item.
 * [ ] User can keep a list of items in the cart.
   * [ ] User can change quantity of each item by entering number.
 * [ ] User can click on checkout from the cart screen to get to the payment screen.
-* [ ] User can type in payment information on the payment screen and click confirm to be taken to the receipt screen.
+* [x] User can type in payment information on the payment screen and click confirm to be taken to the receipt screen.
 * [ ] The receipt screen shows items purchased, cost, and totals.
   * [ ] From the receipt screen, user can go back to the cart screen. Cart is emptied out.
 
@@ -27,18 +27,20 @@ The following **optional** features are implemented:
 
 * [ ] User can turn on flashlight on and off during barcode scan.
 * [ ] User can view history (a list) of previously scanned barcodes and select them as the scanned product.
-  * [ ] When item is selected, user is taken to the detailed screen of the item.
+  * [x] When item is selected, user is taken to the detailed screen of the item.
 * [ ] User can select an image of a barcode from their image gallery.
   * [ ] When image is selected, user is taken to the detailed screen of the item.
   * [ ] User can select which album to choose images from.
   * [ ] User can take an image of a barcode to use as the selected item.
 * [ ] User can change quantity of each item in the cart using a + and - button.
 * [ ] User can see a history of orders made.
-* [ ] User can save payment information.
+* [x] User can save payment information.
 
-## Gif
+## Demo
 
-<img src='https://github.com/codepath-group-1/shop-myself/blob/master/shopmyself1.gif' title='Shop Myself Gif' width='' alt='Shop Myself Gif' />
+Here's a walkthrough of implemented user stories:
+[Video Walkthrough](https://www.youtube.com/watch?v=GLBM-0IERUw) created with [Youtube](https://www.youtube.com/watch?v=GLBM-0IERUw)
+
 ## Wireframes
 
 Here are wireframes of the user stories:

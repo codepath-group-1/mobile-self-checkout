@@ -67,6 +67,9 @@ dependencies {
 
     // Swipe Card
     compile 'in.arjsna:swipecardlib:1.0.2'
+
+    // Credit Card Details
+    compile 'com.vinaygaba:creditcardview:1.0.3'
 }
 
 // Firebase
