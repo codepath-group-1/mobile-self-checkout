@@ -24,7 +24,9 @@ import io.fabric.sdk.android.Fabric;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+
     long upc = 38000786693L;
+
 
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
