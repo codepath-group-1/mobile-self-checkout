@@ -25,4 +25,9 @@
     <string name="sign_up_button_label">Sign up</string>
     <string name="wish_list_item_image">Wish List Item Image</string>
 
+    <string name="scanner">Scan</string>
+    <string name="history">History</string>
+    <string name="wish_list">WishList</string>
+    <string name="cart">Cart</string>
+
 </resources>
