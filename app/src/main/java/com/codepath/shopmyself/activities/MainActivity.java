@@ -1,4 +1,4 @@
-package com.codepath.shopmyself.Activities;
+package com.codepath.shopmyself.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     long upc = 38000786693L;
 
-    private final int REQUEST_CODE = 20;
-
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -54,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
             loadLogInView();
         } else {
             mUserId = mFirebaseUser.getUid();
-
         }
 
     }
@@ -64,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EmailPasswordActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivityForResult(intent, REQUEST_CODE);
+        startActivity(intent);
     }
 
     @Override
@@ -91,9 +88,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickLaunchDetailActivity (View v) {
+        launchDetailActivity();
+    }
+
+    public void launchDetailActivity() {
         Intent i = new Intent(MainActivity.this, ProductDetailsActivity.class);
         i.putExtra("upc", upc);
         startActivity(i);
+
     }
 
     public void scanCustomScanner(View view) {
@@ -104,30 +106,36 @@ public class MainActivity extends AppCompatActivity {
                   .initiateScan();
     }
 
+    public void wishList(View view) {
+        Intent wishListIntent = new Intent(MainActivity.this,
+                                           WishListActivity.class);
+        startActivity(wishListIntent);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
-
-        // REQUEST_CODE is defined above
-        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-
-            IntentResult result =
-                    IntentIntegrator
-                            .parseActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK &&
+            requestCode == IntentIntegrator.REQUEST_CODE) {
+            IntentResult result
+                = IntentIntegrator
+                  .parseActivityResult(requestCode, resultCode, data);
             if(result != null) {
                 if(result.getContents() == null) {
                     Log.d(TAG, "Cancelled scan");
                     Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
                 } else {
-                    Log.d(TAG, "Scanned");
-                    Toast.makeText(this, "Scanned: " + result.getContents(),
-                            Toast.LENGTH_LONG).show();
-                    Log.d("SCANNED: ", result.getContents());
+                    String scannedMessage = "Scanned: " + result.getContents();
+                    Log.d(TAG, scannedMessage);
+                    Toast.makeText(this, scannedMessage,
+                                   Toast.LENGTH_LONG).show();
                     upc = Long.valueOf(result.getContents());
+                    Log.d("SCANNED: ", "upc: " + upc);
+                    Toast.makeText(this, "Scanned: " + upc, Toast.LENGTH_LONG).show();
+                    launchDetailActivity();
                 }
             } else {
-                // This is important, otherwise the result will not be passed to the
-                // fragment.
+                Log.d(TAG, "Scan ERROR");
                 super.onActivityResult(requestCode, resultCode, data);
             }
         }

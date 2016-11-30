@@ -1,4 +1,4 @@
-package com.codepath.shopmyself.Models;
+package com.codepath.shopmyself.models;
 
 
 public class User {

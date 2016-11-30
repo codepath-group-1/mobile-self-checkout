@@ -1,18 +1,27 @@
-package com.codepath.shopmyself.Models;
+package com.codepath.shopmyself.models;
 
 import android.database.Cursor;
 
-import com.codepath.shopmyself.Database.DBHelper;
+import com.codepath.shopmyself.database.DBHelper;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Map;
+
 /**
  * Created by supsingh on 11/11/2016.
  */
 
-public class Items {
+public class Item {
 
     public long getItem_code() {
         return item_code;
@@ -50,9 +59,9 @@ public class Items {
     String item_image_url;
     int item_quantity;
 
-    public Items() {
+    public Item() {
     }
-    public Items(Cursor res) {
+    public Item(Cursor res) {
         this.item_code = res.getLong(res.getColumnIndex(DBHelper.COLUMN_ITEM_CODE));
         this.item_name = res.getString(res.getColumnIndex(DBHelper.COLUMN_ITEM_NAME));
         this.item_description = res.getString(res.getColumnIndex(DBHelper.COLUMN_ITEM_DESCRIPTION));
@@ -61,7 +70,7 @@ public class Items {
         this.item_image_url = res.getString(res.getColumnIndex(DBHelper.COLUMN_ITEM_IMAGEURL));
         this.item_quantity = res.getInt(res.getColumnIndex(DBHelper.COLUMN_ITEM_QUANTITY));
     }
-    public Items(long item_code, String item_name, String item_description, String item_manufacturer, double item_price, String item_image_url, int item_quantity) {
+    public Item(long item_code, String item_name, String item_description, String item_manufacturer, double item_price, String item_image_url, int item_quantity) {
         this.item_code = item_code;
         this.item_name = item_name;
         this.item_description = item_description;
@@ -71,9 +80,42 @@ public class Items {
         this.item_quantity = item_quantity;
     }
 
+    public Item(Map<String, Object> map) {
+        this.item_code = (Long)map.get("item_code");
+        this.item_name = (String)map.get("item_name");
+        this.item_description = (String)map.get("item_description");
+        this.item_manufacturer = (String)map.get("item_manufacturer");
+        this.item_price = (Double)map.get("item_price");
+        this.item_image_url = (String)map.get("item_image_url");
+        this.item_quantity = ((Long)map.get("item_quantity")).intValue();
+    }
+
+    public void addToFirebaseWishList() {
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        DatabaseReference mDatabase
+            = FirebaseDatabase.getInstance().getReference();
+        String mUserId = mFirebaseUser.getUid();
+        mDatabase.child("users").child(mUserId).child("wish_list")
+                 .orderByChild("item_code")
+                 .equalTo(item_code)
+                 .addListenerForSingleValueEvent(new ValueEventListener() {
+                     @Override
+                     public void onDataChange(DataSnapshot dataSnapshot) {
+                         if (!dataSnapshot.hasChildren()) {
+                             dataSnapshot.getRef().push().setValue(Item.this);
+                         }
+                     }
+
+                     @Override
+                     public void onCancelled(DatabaseError databaseError) {
+                     }
+                });
+    }
+
     @Override
     public String toString() {
-        return "Items{" +
+        return "Item{" +
                 "item_code=" + item_code +
                 ", item_name='" + item_name + '\'' +
                 ", item_description='" + item_description + '\'' +
@@ -84,8 +126,8 @@ public class Items {
                 '}';
     }
 
-    public static Items fromJSON(JSONObject response) {
-        Items newItem = new Items();
+    public static Item fromJSON(JSONObject response) {
+        Item newItem = new Item();
 
         try {
             JSONArray itemsArray = response.getJSONArray("items");
