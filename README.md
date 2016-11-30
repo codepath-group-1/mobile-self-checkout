@@ -36,9 +36,11 @@ The following **optional** features are implemented:
 * [ ] User can see a history of orders made.
 * [ ] User can save payment information.
 
-## Gif
+## Demo
 
-<img src='https://github.com/codepath-group-1/shop-myself/blob/master/shopmyself1.gif' title='Shop Myself Gif' width='' alt='Shop Myself Gif' />
+Here's a walkthrough of implemented user stories:
+[Video Walkthrough](https://www.youtube.com/watch?v=GLBM-0IERUw) created with [Youtube](https://www.youtube.com/watch?v=GLBM-0IERUw)
+
 ## Wireframes
 
 Here are wireframes of the user stories:
