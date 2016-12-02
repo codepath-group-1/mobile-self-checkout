@@ -15,12 +15,12 @@
     tools:showIn="@layout/activity_main">
 
 
-    <Button
+   <!-- <Button
         android:text="Custom Scanner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnLaunchCustomScanner"
-        android:onClick="scanCustomScanner" />
+        android:onClick="scanCustomScanner" /> -->
 
     <Button
         android:text="Product Detail"
@@ -46,7 +46,7 @@
 
     <!-- fragment container -->
     <FrameLayout
-        android:id="@+id/contentContainer"
+        android:id="@+id/flContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_navigation" />
@@ -61,6 +61,7 @@
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
         app:menu="@menu/bottom_navigation_main" />
+
 
 </RelativeLayout>
 
