@@ -20,16 +20,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnLaunchCustomScanner"
-        android:onClick="scanCustomScanner" /> -->
-
+        android:onClick="scanCustomScanner" />
     <Button
         android:text="Product Detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnLaunchDetail"
-        android:onClick="onClickLaunchDetailActivity"/>
+        android:onClick="onClickLaunchDetailActivity"/> -->
 
-    <Button
+
+ <Button
         android:text="Show Wish List"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

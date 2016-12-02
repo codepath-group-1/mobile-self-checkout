@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.fragments.ScannerFragment;
+import com.codepath.shopmyself.fragments.WishListFragment;
 import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.action_wish_list:
-
+                fragmentClass = WishListFragment.class;
                 break;
             case R.id.action_history:
 
@@ -142,9 +143,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void wishList(View view) {
+    /*public void wishList(View view) {
         Intent wishListIntent = new Intent(MainActivity.this, WishListActivity.class);
         startActivity(wishListIntent);
-    }
+    }*/
 
 }
