@@ -14,36 +14,6 @@
     tools:context="com.codepath.shopmyself.fragments.MainActivityFragment"
     tools:showIn="@layout/activity_main">
 
-
-   <!-- <Button
-        android:text="Custom Scanner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnLaunchCustomScanner"
-        android:onClick="scanCustomScanner" />
-    <Button
-        android:text="Product Detail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnLaunchDetail"
-        android:onClick="onClickLaunchDetailActivity"/> -->
-
-
- <Button
-        android:text="Show Wish List"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnLaunchWishList"
-        android:onClick="wishList" />
-
-    <Button
-        android:text="Payment Details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnPaymentDetails"
-        android:onClick="paymentDetails" />
-    
-
     <!-- fragment container -->
     <FrameLayout
         android:id="@+id/flContainer"

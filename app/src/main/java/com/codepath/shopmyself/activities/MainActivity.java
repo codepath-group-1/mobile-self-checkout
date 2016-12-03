@@ -142,10 +142,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-
-    /*public void wishList(View view) {
-        Intent wishListIntent = new Intent(MainActivity.this, WishListActivity.class);
-        startActivity(wishListIntent);
-    }*/
-
 }
