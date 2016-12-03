@@ -28,4 +28,9 @@
     <string name="addWishList">Add to Wishlist</string>
     <string name="cart_image">Cart Image</string>
 
+    <string name="scanner">Scan</string>
+    <string name="history">History</string>
+    <string name="wish_list">WishList</string>
+    <string name="cart">Cart</string>
+
 </resources>

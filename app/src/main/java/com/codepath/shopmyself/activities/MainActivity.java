@@ -2,29 +2,28 @@ package com.codepath.shopmyself.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.codepath.shopmyself.R;
+import com.codepath.shopmyself.fragments.ScannerFragment;
+import com.codepath.shopmyself.fragments.WishListFragment;
 import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String TAG = MainActivity.class.getSimpleName();
-    long upc = 38000786693L;
 
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
@@ -32,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private String mUserId;
+
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,55 @@ public class MainActivity extends AppCompatActivity {
             loadLogInView();
         } else {
             mUserId = mFirebaseUser.getUid();
+
+            //Once user is logged in then, we can have
+            //bottom navigation view to load up the selected fragment.
+            //Scanner is the default fragment
+            bottomNavigationView = (BottomNavigationView)
+                    findViewById(R.id.bottom_navigation);
+
+            bottomNavigationView.setOnNavigationItemSelectedListener(
+                    new BottomNavigationView.OnNavigationItemSelectedListener() {
+                        @Override
+                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                            selectFragmentItem(item);
+                            return true;
+                        }
+                    });
         }
+
+    }
+
+    private void selectFragmentItem(MenuItem item) {
+        Fragment fragment = null;
+        Class fragmentClass = null;
+
+        switch (item.getItemId()) {
+            case R.id.action_scan:
+                fragmentClass = ScannerFragment.class;
+                break;
+            case R.id.action_cart:
+
+                break;
+            case R.id.action_wish_list:
+                fragmentClass = WishListFragment.class;
+                break;
+            case R.id.action_history:
+
+                break;
+            default:
+                fragmentClass = ScannerFragment.class;
+        }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
 
     }
 
@@ -87,62 +136,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClickLaunchDetailActivity (View v) {
-        launchDetailActivity();
-    }
-
-    public void launchDetailActivity() {
-        Intent i = new Intent(MainActivity.this, ProductDetailsActivity.class);
-        i.putExtra("upc", upc);
-        startActivity(i);
-
-    }
 
     public void paymentDetails (View v) {
         Intent i = new Intent(MainActivity.this, PaymentDetailsActivity.class);
         startActivity(i);
     }
 
-    public void scanCustomScanner(View view) {
-        IntentIntegrator integrator = new IntentIntegrator(this);
-        integrator.setOrientationLocked(false)
-                  .setCaptureActivity(CustomScannerActivity.class)
-                  .setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES)
-                  .initiateScan();
-    }
-
-    public void wishList(View view) {
-        Intent wishListIntent = new Intent(MainActivity.this,
-                                           WishListActivity.class);
-        startActivity(wishListIntent);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent data) {
-        if (resultCode == RESULT_OK &&
-            requestCode == IntentIntegrator.REQUEST_CODE) {
-            IntentResult result
-                = IntentIntegrator
-                  .parseActivityResult(requestCode, resultCode, data);
-            if(result != null) {
-                if(result.getContents() == null) {
-                    Log.d(TAG, "Cancelled scan");
-                    Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
-                } else {
-                    String scannedMessage = "Scanned: " + result.getContents();
-                    Log.d(TAG, scannedMessage);
-                    Toast.makeText(this, scannedMessage,
-                                   Toast.LENGTH_LONG).show();
-                    upc = Long.valueOf(result.getContents());
-                    Log.d("SCANNED: ", "upc: " + upc);
-                    Toast.makeText(this, "Scanned: " + upc, Toast.LENGTH_LONG).show();
-                    launchDetailActivity();
-                }
-            } else {
-                Log.d(TAG, "Scan ERROR");
-                super.onActivityResult(requestCode, resultCode, data);
-            }
-        }
-    }
 }

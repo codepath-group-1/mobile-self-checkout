@@ -1,8 +1,5 @@
 package com.codepath.shopmyself.models;
 
-/**
- * Created by supsingh on 11/29/2016.
- */
 
 public class CreditCard {
 
