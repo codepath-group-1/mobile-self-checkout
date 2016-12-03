@@ -20,9 +20,11 @@ public class PaymentDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_details);
         creditCardView = (CreditCardView)findViewById(R.id.card_name1);
+
         savedCard = CreditCard.getInstance();
 
         if(savedCard != null) {
+            Log.d("sup:", "savedCard name: " + savedCard.getCardName());
             creditCardView.setCardName(savedCard.getCardName());
             creditCardView.setCardNumber(savedCard.getCardNumber());
             creditCardView.setExpiryDate(savedCard.getCardExpiry());
@@ -40,6 +42,11 @@ public class PaymentDetailsActivity extends AppCompatActivity {
         Log.d("Credit Card", "Credit Card info saved");
 
         // TODO: save the card1 with userdetails
+        backToPrevActivity();
+    }
+
+    public void backToPrevActivity () {
+        this.onBackPressed();
     }
 
 

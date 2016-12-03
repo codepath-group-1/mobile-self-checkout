@@ -107,7 +107,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
 /*
-
     private void renderOnFragment(Item newItem) {
         ImageView ivItemImage2 = (ImageView) findViewById(R.id.ivItemImage2);
         TextView tvTitle2 = (TextView) findViewById(R.id.tvTitle2);
@@ -117,7 +116,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         tvPrice2.setText("$" + newItem.getItem_price());
     }
 */
-
 
     public void onClickAddWishlist(View v) {
         if(newItem != null) {
