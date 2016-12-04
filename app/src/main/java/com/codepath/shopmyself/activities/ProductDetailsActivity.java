@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.codepath.shopmyself.HTTPClient;
@@ -20,6 +22,8 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cz.msebera.android.httpclient.Header;
 import in.arjsna.swipecardlib.SwipeCardView;
@@ -48,6 +52,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                 //renderOnFragment(newItem);
                 setupSwipeCards(newItem);
+                startRepeatedJiggle();
             }
 
             @Override
@@ -178,5 +183,25 @@ public class ProductDetailsActivity extends AppCompatActivity {
         this.onBackPressed();
     }
 
+    public void startRepeatedJiggle () {
+        Timer t = new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
 
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        animJiggleCard();
+                    }
+                });
+            }
+        }, 1, 3000); // start Jiggling after 1 second, Jiggle every 3 seconds
+    }
+
+    public void animJiggleCard () {
+        final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        swipeItemView = (SwipeCardView) findViewById(R.id.svItem);
+        swipeItemView.startAnimation(animShake);
+    }
 }

@@ -75,7 +75,6 @@ public class ScannerFragment extends Fragment {
         Intent i = new Intent(getActivity(), ProductDetailsActivity.class);
         i.putExtra("upc", upc);
         startActivity(i);
-
     }
 }
 
