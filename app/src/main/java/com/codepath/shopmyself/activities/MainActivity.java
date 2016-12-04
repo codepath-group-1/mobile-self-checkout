@@ -93,16 +93,19 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = ScannerFragment.class;
         }
 
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
+        Class currentFragmentClass = fragmentManager.findFragmentById(R.id.flContainer)
+                                                    .getClass();
 
+        if (fragmentClass != currentFragmentClass) {
+            // Insert the fragment by replacing any existing fragment
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
+        }
     }
 
     //will load login activity if user is not logged in
