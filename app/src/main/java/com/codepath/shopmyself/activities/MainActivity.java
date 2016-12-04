@@ -3,6 +3,7 @@ package com.codepath.shopmyself.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -69,11 +70,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            Fragment startFragment = new ScannerFragment();
-            fragmentManager.beginTransaction().replace(R.id.flContainer, startFragment).commit();
+            BottomNavigationItemView scanItemView
+                = (BottomNavigationItemView)bottomNavigationView
+                  .findViewById(R.id.action_scan);
+            scanItemView.performClick();
         }
-
     }
 
     private void selectFragmentItem(MenuItem item) {
@@ -98,13 +99,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Class currentFragmentClass = fragmentManager.findFragmentById(R.id.flContainer)
-                                                    .getClass();
+
+        Fragment currentFragment = fragmentManager.findFragmentById(R.id.flContainer);
+        Class currentFragmentClass = null;
+        if (currentFragment != null) {
+            currentFragmentClass = currentFragment.getClass();
+        }
 
         if (fragmentClass != currentFragmentClass) {
             // Insert the fragment by replacing any existing fragment
             try {
-                fragment = (Fragment) fragmentClass.newInstance();
+                fragment = (Fragment)fragmentClass.newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }
