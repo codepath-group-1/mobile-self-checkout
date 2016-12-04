@@ -61,13 +61,17 @@ public class MainActivity extends AppCompatActivity {
                     findViewById(R.id.bottom_navigation);
 
             bottomNavigationView.setOnNavigationItemSelectedListener(
-                    new BottomNavigationView.OnNavigationItemSelectedListener() {
-                        @Override
-                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                            selectFragmentItem(item);
-                            return true;
-                        }
-                    });
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        selectFragmentItem(item);
+                        return true;
+                    }
+                });
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            Fragment startFragment = new ScannerFragment();
+            fragmentManager.beginTransaction().replace(R.id.flContainer, startFragment).commit();
         }
 
     }
