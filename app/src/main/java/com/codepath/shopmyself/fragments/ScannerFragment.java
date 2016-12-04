@@ -33,20 +33,18 @@ public class ScannerFragment extends Fragment {
     }
 
     public void scanCustomScanner() {
-        IntentIntegrator integrator = new IntentIntegrator(getActivity());
+        IntentIntegrator integrator
+            = IntentIntegrator.forSupportFragment(this);
         integrator.setOrientationLocked(false)
-                .setCaptureActivity(CustomScannerActivity.class)
-                .setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES)
-                .initiateScan();
+                  .setCaptureActivity(CustomScannerActivity.class)
+                  .setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES)
+                  .initiateScan();
     }
 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-
         if (resultCode == RESULT_OK &&
                 requestCode == IntentIntegrator.REQUEST_CODE) {
             IntentResult result
