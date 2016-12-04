@@ -29,5 +29,6 @@
     <string name="history">History</string>
     <string name="wish_list">WishList</string>
     <string name="cart">Cart</string>
+    <string name="scan_barode">Scan Barcode</string>
 
 </resources>

@@ -2,11 +2,13 @@ package com.codepath.shopmyself.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.codepath.shopmyself.R;
@@ -15,21 +17,34 @@ import com.codepath.shopmyself.activities.ProductDetailsActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import static android.app.Activity.RESULT_OK;
-
 public class ScannerFragment extends Fragment {
 
+    protected static final String TAG = ScannerFragment.class
+                                                       .getSimpleName();
+
     private long upc;
-    private static final String TAG = "Scanner Fragment";
+    private Button btnScanBarcode;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.activity_custom_scanner, container, false);
-        //call custom scanner
-        scanCustomScanner();
+        View v =  inflater.inflate(R.layout.fragment_scanner, container, false);
 
         return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        btnScanBarcode = (Button)view.findViewById(R.id.btn_scan_barcode);
+
+        View.OnClickListener scanBarcodeClickListener
+            = new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  scanCustomScanner();
+              }
+        };
+        btnScanBarcode.setOnClickListener(scanBarcodeClickListener);
     }
 
     public void scanCustomScanner() {
@@ -45,29 +60,25 @@ public class ScannerFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
-        if (resultCode == RESULT_OK &&
-                requestCode == IntentIntegrator.REQUEST_CODE) {
-            IntentResult result
-                    = IntentIntegrator
-                    .parseActivityResult(requestCode, resultCode, data);
-            if(result != null) {
-                if(result.getContents() == null) {
-                    Log.d(TAG, "Cancelled scan");
-                    Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_LONG).show();
-                } else {
-                    String scannedMessage = "Scanned: " + result.getContents();
-                    Log.d(TAG, scannedMessage);
-                    Toast.makeText(getActivity(), scannedMessage,
-                            Toast.LENGTH_LONG).show();
-                    upc = Long.valueOf(result.getContents());
-                    Log.d("SCANNED: ", "upc: " + upc);
-                    Toast.makeText(getActivity(), "Scanned: " + upc, Toast.LENGTH_LONG).show();
-                    launchDetailActivity();
-                }
+        IntentResult result
+            = IntentIntegrator
+              .parseActivityResult(requestCode, resultCode, data);
+        if(result != null) {
+            if(result.getContents() == null) {
+                Log.d(TAG, "Cancelled scan");
+                Toast.makeText(getActivity(), "Cancelled",
+                               Toast.LENGTH_LONG).show();
             } else {
-                Log.d(TAG, "Scan ERROR");
-                super.onActivityResult(requestCode, resultCode, data);
+                String scannedMessage = "Scanned: " + result.getContents();
+                Log.d(TAG, scannedMessage);
+                Toast.makeText(getActivity(), scannedMessage,
+                               Toast.LENGTH_LONG).show();
+                upc = Long.valueOf(result.getContents());
+                launchDetailActivity();
             }
+        } else {
+            Log.d(TAG, "Scan ERROR");
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
