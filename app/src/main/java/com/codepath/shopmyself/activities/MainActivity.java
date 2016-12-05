@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
                 return;
             case R.id.action_cart:
+                Log.d("sup", "1");
                 fragmentClass = CartFragment.class;
                 break;
             case R.id.action_wish_list:
@@ -155,8 +157,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.action_other) {
+            long upc = 38000786693L;
             Intent i = new Intent(MainActivity.this, ProductDetailsActivity.class);
-            i.putExtra("upc", 0);
+            i.putExtra("upc", upc);
             startActivity(i);
         }
 

@@ -9,9 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.codepath.shopmyself.models.Item;
+import com.bumptech.glide.Glide;
 import com.codepath.shopmyself.R;
-import com.squareup.picasso.Picasso;
+import com.codepath.shopmyself.models.Item;
 
 import java.util.List;
 
@@ -53,7 +53,7 @@ public class WishListArrayAdapter extends ArrayAdapter<Item> {
 
         viewHolder.ivWishListItemImage.setImageResource(0);
         String imagePath = wishListItem.getItem_image_url();
-        Picasso.with(getContext()).load(imagePath)
+        Glide.with(getContext()).load(imagePath)
                .placeholder(R.mipmap.ic_launcher)
                .into(viewHolder.ivWishListItemImage);
 

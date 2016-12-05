@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.codepath.shopmyself.HTTPClient;
@@ -173,7 +174,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onCardExitBottom(Object dataObject) {
                 Log.d(TAG, "Swipe Bottom!");
                 Toast.makeText(getApplicationContext(), "Item added to cart", Toast.LENGTH_SHORT).show();
-                Item.addToCart(item);
+                addItemToCart(item);
                 backToScanningActivity();
             }
         });
@@ -185,11 +186,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     public void startRepeatedJiggle () {
-        Timer t = new Timer();
-        t.scheduleAtFixedRate(new TimerTask() {
+        Timer t1 = new Timer();
+        t1.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -198,11 +198,39 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 });
             }
         }, 1, 3000); // start Jiggling after 1 second, Jiggle every 3 seconds
+
+
+        Timer t2 = new Timer();
+        t2.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        animWobbleCart();
+                    }
+                });
+
+            }
+        }, 2, 5000); // start Wobbling after 2 second, Jiggle every 5 seconds
+
+
     }
 
     public void animJiggleCard () {
         final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
         swipeItemView = (SwipeCardView) findViewById(R.id.svItem);
         swipeItemView.startAnimation(animShake);
+    }
+
+    public void animWobbleCart () {
+        final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.wobble);
+        ImageView ivShoppingCart= (ImageView) findViewById(R.id.ivShoppingCart);
+        ivShoppingCart.startAnimation(animShake);
+    }
+
+    public void addItemToCart (Item addItem) {
+        Item.addToCart(addItem);
     }
 }

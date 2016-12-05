@@ -2,6 +2,7 @@ package com.codepath.shopmyself.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +11,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.shopmyself.AdapterCommunicator;
 import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.models.Item;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 /**
  * Created by supsingh on 12/3/2016.
@@ -26,7 +25,6 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 public class CartItemsAdapter extends ArrayAdapter<Item> {
 
     AdapterCommunicator aComm;
-
     public void setaComm(AdapterCommunicator aComm) {
         this.aComm = aComm;
     }
@@ -38,8 +36,9 @@ public class CartItemsAdapter extends ArrayAdapter<Item> {
     @NonNull
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        Log.d("sup", "4");
         Item item = getItem(position);
-        ViewHolder viewHolder = null;
+        ViewHolder viewHolder;
 
         if (convertView == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(getContext());
@@ -53,7 +52,7 @@ public class CartItemsAdapter extends ArrayAdapter<Item> {
         }
 
         viewHolder = (ViewHolder) convertView.getTag();
-        Picasso.with(getContext()).load(item.getItem_image_url()).transform(new RoundedCornersTransformation(5, 5)).into(viewHolder.ivItemImage);
+        Glide.with(getContext()).load(item.getItem_image_url()).into(viewHolder.ivItemImage);
         viewHolder.tvItemName.setText(item.getItem_name());
         viewHolder.tvItemPrice.setText("$" + item.getItem_price());
         viewHolder.ibDeleteButton.setOnClickListener(new View.OnClickListener(){

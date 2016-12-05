@@ -1,45 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
-    <RelativeLayout
+    <android.support.percent.PercentRelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/custom_border"
-        android:layout_centerHorizontal="true"
-        app:layout_widthPercent="70%">
+        android:background="@drawable/border"
+        android:layout_centerHorizontal="true">
 
-    <ImageView
-        android:id="@+id/ivSwipeItemImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@mipmap/ic_launcher" />
+            <ImageView
+                android:id="@+id/ivSwipeItemImage"
+                app:layout_widthPercent="30%"
+                app:layout_heightPercent="30%"
+                android:layout_alignParentLeft="true"
+                app:srcCompat="@mipmap/ic_launcher"
+                android:scaleType="fitXY"
+                android:background="@drawable/border"/>
 
-    <TextView
-        android:text="Item Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ivSwipeItemImage"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="5dp"
-        android:id="@+id/tvSwipeTitle"
-        android:textAlignment="center" />
+            <RelativeLayout
+                app:layout_heightPercent="30%"
+                app:layout_widthPercent="70%"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/border">
 
-    <TextView
-        android:text="Item price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvSwipeTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="5dp"
-        android:id="@+id/tvSwipePrice"
-        android:textSize="18sp"
-        android:textStyle="normal|bold"
-        android:textAlignment="center" />
+                <TextView
+                    android:text="Item Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:id="@+id/tvSwipeTitle"
+                    android:textAlignment="center" />
 
-    </RelativeLayout>
+                <TextView
+                    android:text="Item price"
+                    android:layout_below="@+id/tvSwipeTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:id="@+id/tvSwipePrice"
+                    android:textSize="18sp"
+                    android:textStyle="normal|bold"
+                    android:textAlignment="center" />
+
+            </RelativeLayout>
+
+    </android.support.percent.PercentRelativeLayout>
 
 </RelativeLayout>

@@ -160,4 +160,12 @@ public class Item {
         getCartItems();
         cartItems.add(addItem);
     }
+    public static double getTotal () {
+        double total = 0;
+        ArrayList<Item> allItems = getCartItems();
+        for (int i = 0; i < allItems.size(); ++i) {
+            total += allItems.get(i).getItem_price();
+        }
+        return total;
+    }
 }

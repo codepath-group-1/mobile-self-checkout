@@ -9,13 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.models.Item;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 import static com.crashlytics.android.beta.Beta.TAG;
 
@@ -37,11 +35,25 @@ public class ItemSwipeAdapter extends ArrayAdapter<Item> {
     public View getView(int position, View convertView, ViewGroup parent) {
         Log.d(TAG, "sup: getView for pos: " + position);
         Item item = items.get(position);
-        View view = layoutInflater.inflate(R.layout.item_swipe, parent, false);
-        Picasso.with(getContext()).load(item.getItem_image_url()).transform(new RoundedCornersTransformation(10, 10)).into(((ImageView) view.findViewById(R.id.ivSwipeItemImage)));
-        ((TextView)view.findViewById(R.id.tvSwipeTitle)).setText(item.getItem_name());
-        ((TextView)view.findViewById(R.id.tvSwipePrice)).setText("$" + item.getItem_price());
-        return view;
+        SwipeViewHolder viewHolder;
+
+        if (convertView == null) {
+            convertView = layoutInflater.inflate(R.layout.item_swipe, parent, false);
+
+            viewHolder = new SwipeViewHolder();
+            viewHolder.ivItemImage = (ImageView) convertView.findViewById(R.id.ivSwipeItemImage);
+            viewHolder.tvItemName = (TextView) convertView.findViewById(R.id.tvSwipeTitle);
+            viewHolder.tvItemPrice = (TextView) convertView.findViewById(R.id.tvSwipePrice);
+
+            convertView.setTag(viewHolder);
+        }
+        viewHolder = (SwipeViewHolder) convertView.getTag();
+
+        Glide.with(getContext()).load(item.getItem_image_url()).into(viewHolder.ivItemImage);
+        viewHolder.tvItemName.setText(item.getItem_name());
+        viewHolder.tvItemPrice.setText("$" + item.getItem_price());
+
+        return convertView;
     }
 
     @Override
@@ -55,3 +67,9 @@ public class ItemSwipeAdapter extends ArrayAdapter<Item> {
     }
 }
 
+
+class SwipeViewHolder {
+    ImageView ivItemImage;
+    TextView tvItemName;
+    TextView tvItemPrice;
+}
