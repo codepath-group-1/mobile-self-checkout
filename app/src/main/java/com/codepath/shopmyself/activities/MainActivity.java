@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.fragments.ScannerFragment;
@@ -21,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.zxing.integration.android.IntentIntegrator;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private String mUserId;
 
     private BottomNavigationView bottomNavigationView;
+    private BottomNavigationItemView cartItemView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +71,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-            BottomNavigationItemView scanItemView
-                = (BottomNavigationItemView)bottomNavigationView
-                  .findViewById(R.id.action_scan);
-            scanItemView.performClick();
+            cartItemView = (BottomNavigationItemView)bottomNavigationView
+                           .findViewById(R.id.action_cart);
+            cartItemView.performClick();
         }
     }
 
@@ -83,16 +83,24 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.action_scan:
-                fragmentClass = ScannerFragment.class;
-                break;
-            case R.id.action_cart:
+                IntentIntegrator integrator
+                        = new IntentIntegrator(this);
+                integrator.setOrientationLocked(false)
+                        .setCaptureActivity(ContinuousCaptureActivity.class)
+                        .setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+                startActivity(integrator.createScanIntent());
 
+                cartItemView.performClick();
+
+                return;
+            case R.id.action_cart:
+                fragmentClass = ScannerFragment.class;
                 break;
             case R.id.action_wish_list:
                 fragmentClass = WishListFragment.class;
                 break;
             case R.id.action_history:
-
+                fragmentClass = ScannerFragment.class;
                 break;
             default:
                 fragmentClass = ScannerFragment.class;
@@ -146,11 +154,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-
-    public void paymentDetails (View v) {
-        Intent i = new Intent(MainActivity.this, PaymentDetailsActivity.class);
-        startActivity(i);
     }
 }
