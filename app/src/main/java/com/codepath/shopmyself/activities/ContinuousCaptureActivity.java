@@ -118,10 +118,6 @@ implements DecoratedBarcodeView.TorchListener {
         barcodeView.pause();
     }
 
-    public void triggerScan(View view) {
-        barcodeView.decodeSingle(callback);
-    }
-
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
