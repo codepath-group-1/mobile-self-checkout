@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.codepath.shopmyself.R;
+import com.codepath.shopmyself.fragments.CartFragment;
 import com.codepath.shopmyself.fragments.ScannerFragment;
 import com.codepath.shopmyself.fragments.WishListFragment;
 import com.crashlytics.android.Crashlytics;
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = ScannerFragment.class;
                 break;
             case R.id.action_cart:
-
+                fragmentClass = CartFragment.class;
                 break;
             case R.id.action_wish_list:
                 fragmentClass = WishListFragment.class;
@@ -137,6 +138,12 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_logout) {
             mFirebaseAuth.signOut();
             loadLogInView();
+        }
+
+        if (id == R.id.action_other) {
+            Intent i = new Intent(MainActivity.this, ProductDetailsActivity.class);
+            i.putExtra("upc", 0);
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);

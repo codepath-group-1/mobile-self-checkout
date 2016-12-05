@@ -22,7 +22,7 @@
         <activity
             android:name=".activities.CustomScannerActivity"
             android:label="@string/title_activity_scan_barcode"
-            android:screenOrientation="fullSensor"></activity>
+            android:screenOrientation="fullSensor" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
@@ -31,8 +31,9 @@
         <activity android:name=".activities.ProductDetailsActivity" />
         <activity android:name=".activities.EmailPasswordActivity" />
         <activity android:name=".activities.SignUpActivity" />
-        <activity android:name=".activities.WishListActivity"></activity>
-        <activity android:name=".activities.PaymentDetailsActivity"></activity>
+        <activity android:name=".activities.WishListActivity" />
+        <activity android:name=".activities.PaymentDetailsActivity" />
+        <activity android:name=".CheckoutActivity"></activity>
     </application>
 
 </manifest>

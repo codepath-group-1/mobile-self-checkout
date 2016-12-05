@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -145,5 +146,18 @@ public class Item {
         }
 
         return newItem;
+    }
+
+    // Statics
+    public static ArrayList<Item> cartItems;
+    public static ArrayList<Item> getCartItems () {
+        if(cartItems == null) {
+            cartItems = new ArrayList<>();
+        }
+        return cartItems;
+    }
+    public static void addToCart (Item addItem) {
+        getCartItems();
+        cartItems.add(addItem);
     }
 }

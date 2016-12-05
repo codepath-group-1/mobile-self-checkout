@@ -133,7 +133,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     // Swipe Cards
     private ArrayList<Item> al;
     SwipeCardView swipeItemView;
-    private  void setupSwipeCards(Item item) {
+    private  void setupSwipeCards(final Item item) {
 
 
         al = new ArrayList<>();
@@ -173,6 +173,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onCardExitBottom(Object dataObject) {
                 Log.d(TAG, "Swipe Bottom!");
                 Toast.makeText(getApplicationContext(), "Item added to cart", Toast.LENGTH_SHORT).show();
+                Item.addToCart(item);
                 backToScanningActivity();
             }
         });
