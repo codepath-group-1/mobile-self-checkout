@@ -23,6 +23,9 @@
             android:name=".activities.CustomScannerActivity"
             android:label="@string/title_activity_scan_barcode"
             android:screenOrientation="fullSensor" />
+        <activity android:name=".activities.ContinuousCaptureActivity"
+            android:label="@string/title_activity_scan_barcode"
+            android:screenOrientation="fullSensor" />
 
         <activity android:name=".activities.ContinuousCaptureActivity"
             android:label="@string/title_activity_scan_barcode"
@@ -38,6 +41,7 @@
         <activity android:name=".activities.WishListActivity" />
         <activity android:name=".activities.PaymentDetailsActivity" />
         <activity android:name=".CheckoutActivity"></activity>
+
     </application>
 
 </manifest>
