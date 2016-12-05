@@ -197,7 +197,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     }
                 });
             }
-        }, 1, 3000); // start Jiggling after 1 second, Jiggle every 3 seconds
+        }, 3, 5000); // start Jiggling after 1 second, Jiggle every 3 seconds
 
 
         Timer t2 = new Timer();

@@ -37,6 +37,7 @@
             android:id="@+id/svItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             app:left_swipe_detect="false"
             app:right_swipe_detect="false"
             app:rotation_degrees="15.5"
