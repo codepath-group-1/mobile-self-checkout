@@ -2,6 +2,7 @@ package com.codepath.shopmyself.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -38,6 +39,10 @@ public class WishListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wish_list);
 
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         lvWishList = (ListView)findViewById(R.id.lvWishList);
         wishList = new ArrayList<>();
         wishListAdapter
@@ -51,6 +56,12 @@ public class WishListActivity extends AppCompatActivity {
         mUserId = mFirebaseUser.getUid();
 
         setupListViewListeners();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     private void setupListViewListeners() {

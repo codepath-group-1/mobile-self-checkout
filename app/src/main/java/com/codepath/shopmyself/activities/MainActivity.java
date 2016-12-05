@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private BottomNavigationItemView cartItemView;
+    private BottomNavigationItemView wishListItemView;
+    private BottomNavigationItemView historyItemView;
+    private BottomNavigationItemView previousItemView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
 
             cartItemView = (BottomNavigationItemView)bottomNavigationView
                            .findViewById(R.id.action_cart);
+            wishListItemView = (BottomNavigationItemView)bottomNavigationView
+                               .findViewById(R.id.action_wish_list);
+            historyItemView = (BottomNavigationItemView)bottomNavigationView
+                              .findViewById(R.id.action_history);
+            previousItemView = cartItemView;
             cartItemView.performClick();
         }
     }
@@ -92,21 +100,22 @@ public class MainActivity extends AppCompatActivity {
                         .setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
                 startActivity(integrator.createScanIntent());
 
-                cartItemView.performClick();
+                previousItemView.performClick();
 
                 return;
             case R.id.action_cart:
                 Log.d("sup", "1");
                 fragmentClass = CartFragment.class;
+                previousItemView = cartItemView;
                 break;
             case R.id.action_wish_list:
                 fragmentClass = WishListFragment.class;
+                previousItemView = wishListItemView;
                 break;
             case R.id.action_history:
                 fragmentClass = ScannerFragment.class;
+                previousItemView = historyItemView;
                 break;
-            default:
-                fragmentClass = ScannerFragment.class;
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();

@@ -1,7 +1,9 @@
-package com.codepath.shopmyself;
+package com.codepath.shopmyself.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.codepath.shopmyself.R;
 
 public class CheckoutActivity extends AppCompatActivity {
 

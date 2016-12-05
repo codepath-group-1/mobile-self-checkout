@@ -6,16 +6,9 @@
     <string name="title_activity_scan_barcode">Scan Barcode</string>
 
 
-    <string name="hint_user_id">User ID</string>
-    <string name="get_custom_token">Get Token</string>
     <string name="sign_in">Sign In</string>
     <string name="create_account">Create Account</string>
     <string name="sign_out">Sign Out</string>
-    <string name="disconnect">Disconnect</string>
-    <string name="loading">Loading…</string>
-    <string name="custom_token">Custom Token</string>
-    <string name="signed_out">Signed Out</string>
-    <string name="token_null">Token: null</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="auth_failed">Authentication failed</string>
@@ -25,13 +18,13 @@
     <string name="sign_up_button_label">Sign up</string>
     <string name="wish_list_item_image">Wish List Item Image</string>
     <string name="swipe_message">Swipe Down to add to cart. Swipe up to discard</string>
-    <string name="addWishList">Add to Wishlist</string>
+    <string name="addWishList">ADD TO WISHLIST</string>
     <string name="cart_image">Cart Image</string>
-
     <string name="scanner">Scan</string>
     <string name="history">History</string>
     <string name="wish_list">WishList</string>
     <string name="cart">Cart</string>
     <string name="scan_barode">Scan Barcode</string>
+    <string name="add_to_cart">ADD TO CART</string>
 
 </resources>
