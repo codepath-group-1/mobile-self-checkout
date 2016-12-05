@@ -3,15 +3,14 @@ package com.codepath.shopmyself.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.fragments.CartFragment;
@@ -22,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.zxing.integration.android.IntentIntegrator;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private String mUserId;
 
     private BottomNavigationView bottomNavigationView;
+    private BottomNavigationItemView cartItemView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,15 +64,18 @@ public class MainActivity extends AppCompatActivity {
                     findViewById(R.id.bottom_navigation);
 
             bottomNavigationView.setOnNavigationItemSelectedListener(
-                    new BottomNavigationView.OnNavigationItemSelectedListener() {
-                        @Override
-                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                            selectFragmentItem(item);
-                            return true;
-                        }
-                    });
-        }
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        selectFragmentItem(item);
+                        return true;
+                    }
+                });
 
+            cartItemView = (BottomNavigationItemView)bottomNavigationView
+                           .findViewById(R.id.action_cart);
+            cartItemView.performClick();
+        }
     }
 
     private void selectFragmentItem(MenuItem item) {
@@ -80,8 +84,16 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.action_scan:
-                fragmentClass = ScannerFragment.class;
-                break;
+                IntentIntegrator integrator
+                        = new IntentIntegrator(this);
+                integrator.setOrientationLocked(false)
+                        .setCaptureActivity(ContinuousCaptureActivity.class)
+                        .setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+                startActivity(integrator.createScanIntent());
+
+                cartItemView.performClick();
+
+                return;
             case R.id.action_cart:
                 fragmentClass = CartFragment.class;
                 break;
@@ -89,27 +101,29 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = WishListFragment.class;
                 break;
             case R.id.action_history:
-
+                fragmentClass = ScannerFragment.class;
                 break;
             default:
                 fragmentClass = ScannerFragment.class;
         }
 
-        if (fragmentClass == null) {
-            Log.d("MainActivity:", "Fragment not implemented");
-            return;
-        }
-
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
 
+        Fragment currentFragment = fragmentManager.findFragmentById(R.id.flContainer);
+        Class currentFragmentClass = null;
+        if (currentFragment != null) {
+            currentFragmentClass = currentFragment.getClass();
+        }
+
+        if (fragmentClass != currentFragmentClass) {
+            // Insert the fragment by replacing any existing fragment
+            try {
+                fragment = (Fragment)fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
+        }
     }
 
     //will load login activity if user is not logged in
@@ -147,11 +161,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-
-    public void paymentDetails (View v) {
-        Intent i = new Intent(MainActivity.this, PaymentDetailsActivity.class);
-        startActivity(i);
     }
 }
