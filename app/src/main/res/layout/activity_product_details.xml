@@ -64,6 +64,7 @@
             android:layout_above="@+id/bnWishlist"
             android:src="@drawable/shopping_cart"
             android:id="@+id/imageView"
+            android:scaleType="fitCenter"
             android:contentDescription="@string/cart_image" />
 
         <Button
