@@ -3,18 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".activities.ProductDetailsActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appBarLayout"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+    </android.support.design.widget.AppBarLayout>
 
 <android.support.percent.PercentRelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_product_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context="com.codepath.shopmyself.activities.ProductDetailsActivity">
-
+    android:layout_below="@+id/appBarLayout">
 
     <LinearLayout
         android:id="@+id/llItemHolder"
@@ -38,8 +51,7 @@
             android:layout_height="wrap_content"
             app:left_swipe_detect="false"
             app:right_swipe_detect="false"
-            app:rotation_degrees="15.5"
-            tools:context=".CardSwipeActivity" />
+            app:rotation_degrees="15.5" />
 
     </LinearLayout>
 
@@ -76,7 +88,6 @@
             android:text="@string/addWishList" />
 
     </RelativeLayout>
-
 
 </android.support.percent.PercentRelativeLayout>
 
