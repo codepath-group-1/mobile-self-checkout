@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="3dp"
+    android:paddingTop="3dp">
 
     <ImageView
         android:layout_width="@dimen/wish_list_item_size"
@@ -28,12 +30,20 @@
         android:layout_toEndOf="@+id/ivWishListItemImage"/>
 
     <Button
-        android:text="@string/add_to_cart"
+        android:text="@string/move_to_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnAddToCart"
         android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/ibWishLishDeleteButton"/>
+
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_delete_black_24dp"
+        android:id="@+id/ibWishLishDeleteButton"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignTop="@+id/ivWishListItemImage"
+        android:layout_alignBottom="@+id/ivWishListItemImage"/>
 
 </RelativeLayout>

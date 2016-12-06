@@ -26,5 +26,6 @@
     <string name="cart">Cart</string>
     <string name="scan_barode">Scan Barcode</string>
     <string name="add_to_cart">ADD TO CART</string>
+    <string name="move_to_cart">Move to cart</string>
 
 </resources>
