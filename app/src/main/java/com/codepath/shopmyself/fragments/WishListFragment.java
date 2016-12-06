@@ -37,22 +37,6 @@ public class WishListFragment extends Fragment {
     private DatabaseReference mDatabase;
     private String mUserId;
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        View v =  inflater.inflate(R.layout.activity_wish_list, container, false);
-
-        lvWishList = (ListView) v.findViewById(R.id.lvWishList);
-        wishList = new ArrayList<>();
-        wishListAdapter = new WishListArrayAdapter(getContext(), wishList);
-        lvWishList.setAdapter(wishListAdapter);
-
-        setupListViewListeners();
-
-        return  v;
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,75 +46,104 @@ public class WishListFragment extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mUserId = mFirebaseUser.getUid();
+
+        wishList = new ArrayList<>();
+        wishListAdapter = new WishListArrayAdapter(getActivity(), wishList);
+
+        setupListListeners();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        View v = inflater.inflate(R.layout.fragment_wish_list, container,
+                                  false);
+
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        lvWishList = (ListView)view.findViewById(R.id.lvWishList);
+        lvWishList.setAdapter(wishListAdapter);
+
+        setupListViewListeners();
+    }
+
+    private void setupListListeners() {
+        mDatabase
+        .child("users")
+        .child(mUserId)
+        .child("wish_list")
+        .addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Item wishListItem
+                    = new Item((Map<String, Object>)dataSnapshot.getValue());
+                wishListAdapter.add(wishListItem);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                long itemCode
+                    = (Long)dataSnapshot.child("item_code").getValue();
+                for (int i = 0; i < wishList.size(); i++) {
+                    Item wishListItem = wishList.get(i);
+                    if (wishListItem.getItem_code() == itemCode) {
+                        wishList.remove(i);
+                        wishListAdapter.notifyDataSetChanged();
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
     private void setupListViewListeners() {
-        mDatabase
-                .child("users")
-                .child(mUserId)
-                .child("wish_list")
-                .addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        Item wishListItem
-                                = new Item((Map<String, Object>)dataSnapshot.getValue());
-                        wishListAdapter.add(wishListItem);
-                    }
+        AdapterView.OnItemLongClickListener listViewItemLongClickListener
+            = new AdapterView.OnItemLongClickListener() {
+                  @Override
+                  public boolean onItemLongClick(AdapterView<?> adapter,
+                                                 View item, int position,
+                                                 long id) {
+                      mDatabase.child("users").child(mUserId).child("wish_list")
+                               .orderByChild("item_code")
+                               .equalTo(wishList.get(position).getItem_code())
+                               .addListenerForSingleValueEvent(new ValueEventListener() {
+                                   @Override
+                                   public void onDataChange(DataSnapshot dataSnapshot) {
+                                       if (dataSnapshot.hasChildren()) {
+                                           DataSnapshot firstChild
+                                               = dataSnapshot.getChildren()
+                                                             .iterator()
+                                                             .next();
+                                           firstChild.getRef().removeValue();
+                                       }
+                                   }
 
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    }
+                                   @Override
+                                   public void onCancelled(DatabaseError databaseError) {
+                                   }
+                              });
+                      return true;
+                  }
+              };
 
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-                        long itemCode
-                                = (Long)dataSnapshot.child("item_code").getValue();
-                        for (int i = 0; i < wishList.size(); i++) {
-                            Item wishListItem = wishList.get(i);
-                            if (wishListItem.getItem_code() == itemCode) {
-                                wishList.remove(i);
-                                wishListAdapter.notifyDataSetChanged();
-                                break;
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-
-        lvWishList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapter,
-                                           View item, int position,
-                                           long id) {
-                mDatabase.child("users").child(mUserId).child("wish_list")
-                        .orderByChild("item_code")
-                        .equalTo(wishList.get(position).getItem_code())
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.hasChildren()) {
-                                    DataSnapshot firstChild
-                                            = dataSnapshot.getChildren()
-                                            .iterator()
-                                            .next();
-                                    firstChild.getRef().removeValue();
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                            }
-                        });
-                return true;
-            }
-        });
-
+        lvWishList.setOnItemLongClickListener(listViewItemLongClickListener);
     }
 }

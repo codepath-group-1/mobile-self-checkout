@@ -49,7 +49,7 @@ public class WishListArrayAdapter extends ArrayAdapter<Item> {
                       .findViewById(R.id.tvWishListItemName);
             viewHolder.btnAddToCart
                     = (Button)convertView
-                      .findViewById(R.id.btnAddToCart);
+                      .findViewById(R.id.btnMoveToCart);
 
             convertView.setTag(viewHolder);
         } else {
