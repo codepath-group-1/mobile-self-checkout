@@ -22,7 +22,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class WishListFragment extends Fragment {
 
@@ -81,7 +80,7 @@ public class WishListFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Item wishListItem
-                    = new Item((Map<String, Object>)dataSnapshot.getValue());
+                    = new Item(dataSnapshot);
                 wishListAdapter.add(wishListItem);
             }
 

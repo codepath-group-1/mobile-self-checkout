@@ -185,7 +185,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onCardExitBottom(Object dataObject) {
                 Log.d(TAG, "Swipe Bottom!");
                 Toast.makeText(getApplicationContext(), "Item added to cart", Toast.LENGTH_SHORT).show();
-                addItemToCart(item);
+                item.addToFirebaseCart();
                 backToScanningActivity();
             }
         });
@@ -239,9 +239,5 @@ public class ProductDetailsActivity extends AppCompatActivity {
         final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.wobble);
         ImageView ivShoppingCart= (ImageView) findViewById(R.id.ivShoppingCart);
         ivShoppingCart.startAnimation(animShake);
-    }
-
-    public void addItemToCart (Item addItem) {
-        Item.addToCart(addItem);
     }
 }

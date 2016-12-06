@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.codepath.shopmyself.AdapterCommunicator;
 import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.models.Item;
 
@@ -23,11 +22,6 @@ import java.util.List;
  */
 
 public class CartItemsAdapter extends ArrayAdapter<Item> {
-
-    AdapterCommunicator aComm;
-    public void setaComm(AdapterCommunicator aComm) {
-        this.aComm = aComm;
-    }
 
     public CartItemsAdapter(Context context, List<Item> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
@@ -55,10 +49,12 @@ public class CartItemsAdapter extends ArrayAdapter<Item> {
         Glide.with(getContext()).load(item.getItem_image_url()).into(viewHolder.ivItemImage);
         viewHolder.tvItemName.setText(item.getItem_name());
         viewHolder.tvItemPrice.setText("$" + item.getItem_price());
-        viewHolder.ibDeleteButton.setOnClickListener(new View.OnClickListener(){
+        viewHolder.ibDeleteButton.setTag(item);
+        viewHolder.ibDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                aComm.deleteEntry(position);
+                Item cartItem = (Item)view.getTag();
+                cartItem.removeFromFirebaseCart();
             }
         });
 
