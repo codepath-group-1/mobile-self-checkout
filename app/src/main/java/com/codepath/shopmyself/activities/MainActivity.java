@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationItemView wishListItemView;
     private BottomNavigationItemView historyItemView;
     private BottomNavigationItemView previousItemView;
+    private Fragment previousFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,16 +121,16 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.flContainer);
-        Class currentFragmentClass = null;
-        if (currentFragment != null) {
-            currentFragmentClass = currentFragment.getClass();
+        Class previousFragmentClass = null;
+        if (previousFragment != null) {
+            previousFragmentClass = previousFragment.getClass();
         }
 
-        if (fragmentClass != currentFragmentClass) {
+        if (fragmentClass != previousFragmentClass) {
             // Insert the fragment by replacing any existing fragment
             try {
                 fragment = (Fragment)fragmentClass.newInstance();
+                previousFragment = fragment;
             } catch (Exception e) {
                 e.printStackTrace();
             }
