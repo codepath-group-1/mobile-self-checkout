@@ -26,7 +26,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:text="$50.00"
+            android:text="$0.00"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -38,7 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btnCheckout"
-            android:layout_below="@+id/tvTotal"/>
+            android:layout_below="@+id/tvTotal"
+            android:background="@color/colorAccent"/>
 
     </RelativeLayout>
 
