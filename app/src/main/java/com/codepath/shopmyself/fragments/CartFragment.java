@@ -10,19 +10,49 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.codepath.shopmyself.AdapterCommunicator;
 import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.adapters.CartItemsAdapter;
 import com.codepath.shopmyself.models.Item;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class CartFragment extends Fragment implements AdapterCommunicator {
+public class CartFragment extends Fragment {
 
     ListView lvCart;
     ArrayList<Item> itemList;
     CartItemsAdapter cartItemsAdapter;
     TextView tvTotal;
+
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+
+    private DatabaseReference mDatabase;
+    private String mUserId;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mUserId = mFirebaseUser.getUid();
+
+        Log.d("sup", "2");
+        itemList = new ArrayList<>();
+        Log.d("sup", "2. size = " + itemList.size());
+        cartItemsAdapter = new CartItemsAdapter(getActivity(), itemList);
+
+        setupListListeners();
+    }
 
     @Nullable
     @Override
@@ -30,42 +60,61 @@ public class CartFragment extends Fragment implements AdapterCommunicator {
         Log.d("sup", "3");
         View v = inflater.inflate(R.layout.fragment_cart, container, false);
 
-        tvTotal = (TextView) v.findViewById(R.id.tvTotal);
-        lvCart = (ListView) v.findViewById(R.id.lvCart);
-        lvCart.setAdapter(cartItemsAdapter);
-        cartItemsAdapter.setaComm(this);
-        cartItemsAdapter.notifyDataSetChanged();
-
         return v;
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.d("sup", "2");
-        itemList = Item.getCartItems();
-        Log.d("sup", "2. size = " + itemList.size());
-        cartItemsAdapter = new CartItemsAdapter(getActivity(), itemList);
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        tvTotal = (TextView)view.findViewById(R.id.tvTotal);
+        lvCart = (ListView)view.findViewById(R.id.lvCart);
+        lvCart.setAdapter(cartItemsAdapter);
     }
 
-    @Override
-    public void deleteEntry(int position) {
-        Log.d("sup:", "Deleting position " + position);
-        itemList.remove(position);
-        cartItemsAdapter.notifyDataSetChanged();
-        updateTotal();
+    private void setupListListeners() {
+        mDatabase
+        .child("users")
+        .child(mUserId)
+        .child("cart")
+        .addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Item wishListItem
+                    = new Item(dataSnapshot);
+                cartItemsAdapter.add(wishListItem);
+                updateTotal();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                long itemCode
+                    = (Long)dataSnapshot.child("item_code").getValue();
+                for (int i = 0; i < itemList.size(); i++) {
+                    Item wishListItem = itemList.get(i);
+                    if (wishListItem.getItem_code() == itemCode) {
+                        itemList.remove(i);
+                        cartItemsAdapter.notifyDataSetChanged();
+                        updateTotal();
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
-    @Override
-    public void onResume() {
-        Log.d("sup:", "onResume");
-        cartItemsAdapter.notifyDataSetChanged();
-        updateTotal();
-        super.onResume();
-    }
-
-    public void updateTotal () {
-        double total = Item.getTotal();
+    private void updateTotal() {
+        double total = Item.getTotal(itemList);
         tvTotal.setText("$" + total);
     }
 }

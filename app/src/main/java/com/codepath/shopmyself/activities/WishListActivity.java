@@ -20,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class WishListActivity extends AppCompatActivity {
 
@@ -73,7 +72,7 @@ public class WishListActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Item wishListItem
-                    = new Item((Map<String, Object>)dataSnapshot.getValue());
+                    = new Item(dataSnapshot);
                 wishListAdapter.add(wishListItem);
             }
 

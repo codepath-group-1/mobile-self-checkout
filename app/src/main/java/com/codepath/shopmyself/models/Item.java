@@ -15,7 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -81,14 +81,16 @@ public class Item {
         this.item_quantity = item_quantity;
     }
 
-    public Item(Map<String, Object> map) {
-        this.item_code = (Long)map.get("item_code");
+    public Item(DataSnapshot dataSnapshot) {
+        Map<String, Object> map = (Map<String, Object>)dataSnapshot.getValue();
+
+        this.item_code = ((Number)map.get("item_code")).longValue();
         this.item_name = (String)map.get("item_name");
         this.item_description = (String)map.get("item_description");
         this.item_manufacturer = (String)map.get("item_manufacturer");
-        this.item_price = (Double)map.get("item_price");
+        this.item_price = ((Number)map.get("item_price")).doubleValue();
         this.item_image_url = (String)map.get("item_image_url");
-        this.item_quantity = ((Long)map.get("item_quantity")).intValue();
+        this.item_quantity = ((Number)map.get("item_quantity")).intValue();
     }
 
     public void addToFirebaseWishList() {
@@ -225,23 +227,10 @@ public class Item {
         return newItem;
     }
 
-    // Statics
-    public static ArrayList<Item> cartItems;
-    public static ArrayList<Item> getCartItems () {
-        if(cartItems == null) {
-            cartItems = new ArrayList<>();
-        }
-        return cartItems;
-    }
-    public static void addToCart (Item addItem) {
-        getCartItems();
-        cartItems.add(addItem);
-    }
-    public static double getTotal () {
+    public static double getTotal(List<Item> items) {
         double total = 0;
-        ArrayList<Item> allItems = getCartItems();
-        for (int i = 0; i < allItems.size(); ++i) {
-            total += allItems.get(i).getItem_price();
+        for (int i = 0; i < items.size(); i++) {
+            total += items.get(i).getItem_price();
         }
         return total;
     }
