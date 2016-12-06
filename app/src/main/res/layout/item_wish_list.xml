@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="@dimen/wish_list_item_size"
@@ -15,13 +16,13 @@
         tools:src="@mipmap/ic_launcher"/>
 
     <TextView
-        tools:text="Asics Shoes"
+        tools:text
+            ="Kellog's Special K Cereal Chocolatey Delight 13.1 OZ (Pack of 14)"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/wish_list_item_size"
+        android:layout_height="wrap_content"
         android:id="@+id/tvWishListItemName"
         android:gravity="center"
         android:layout_alignParentTop="true"
-        android:layout_alignBottom="@+id/ivWishListItemImage"
         android:layout_toLeftOf="@+id/btnAddToCart"
         android:layout_toStartOf="@+id/btnAddToCart"
         android:layout_toRightOf="@+id/ivWishListItemImage"
