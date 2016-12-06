@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +22,8 @@ public class WishListArrayAdapter extends ArrayAdapter<Item> {
     private static class ViewHolder {
         ImageView ivWishListItemImage;
         TextView tvWishListItemName;
-        Button btnAddToCart;
+        Button btnMoveToCart;
+        ImageButton ibWishLishDeleteButton;
     }
 
     public WishListArrayAdapter(Context context, List<Item> wishList) {
@@ -47,9 +49,12 @@ public class WishListArrayAdapter extends ArrayAdapter<Item> {
             viewHolder.tvWishListItemName
                     = (TextView)convertView
                       .findViewById(R.id.tvWishListItemName);
-            viewHolder.btnAddToCart
+            viewHolder.btnMoveToCart
                     = (Button)convertView
                       .findViewById(R.id.btnMoveToCart);
+            viewHolder.ibWishLishDeleteButton
+                    = (ImageButton)convertView
+                      .findViewById(R.id.ibWishLishDeleteButton);
 
             convertView.setTag(viewHolder);
         } else {
@@ -64,12 +69,22 @@ public class WishListArrayAdapter extends ArrayAdapter<Item> {
 
         viewHolder.tvWishListItemName.setText(wishListItem.getItem_name());
 
-        viewHolder.btnAddToCart.setTag(wishListItem);
-        viewHolder.btnAddToCart.setOnClickListener(new View.OnClickListener() {
+        viewHolder.btnMoveToCart.setTag(wishListItem);
+        viewHolder.btnMoveToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Item wishListItem = (Item)view.getTag();
+                wishListItem.removeFromFirebaseWishList();
                 wishListItem.addToFirebaseCart();
+            }
+        });
+
+        viewHolder.ibWishLishDeleteButton.setTag(wishListItem);
+        viewHolder.ibWishLishDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Item wishListItem = (Item)view.getTag();
+                wishListItem.removeFromFirebaseWishList();
             }
         });
 

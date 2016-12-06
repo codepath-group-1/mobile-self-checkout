@@ -20,7 +20,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -121,25 +120,7 @@ public class WishListFragment extends Fragment {
                   public boolean onItemLongClick(AdapterView<?> adapter,
                                                  View item, int position,
                                                  long id) {
-                      mDatabase.child("users").child(mUserId).child("wish_list")
-                               .orderByChild("item_code")
-                               .equalTo(wishList.get(position).getItem_code())
-                               .addListenerForSingleValueEvent(new ValueEventListener() {
-                                   @Override
-                                   public void onDataChange(DataSnapshot dataSnapshot) {
-                                       if (dataSnapshot.hasChildren()) {
-                                           DataSnapshot firstChild
-                                               = dataSnapshot.getChildren()
-                                                             .iterator()
-                                                             .next();
-                                           firstChild.getRef().removeValue();
-                                       }
-                                   }
-
-                                   @Override
-                                   public void onCancelled(DatabaseError databaseError) {
-                                   }
-                              });
+                      wishList.get(position).removeFromFirebaseWishList();
                       return true;
                   }
               };

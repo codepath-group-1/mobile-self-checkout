@@ -114,6 +114,33 @@ public class Item {
                 });
     }
 
+    public void removeFromFirebaseWishList() {
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        DatabaseReference mDatabase
+                = FirebaseDatabase.getInstance().getReference();
+        String mUserId = mFirebaseUser.getUid();
+        mDatabase.child("users").child(mUserId).child("wish_list")
+                 .orderByChild("item_code")
+                 .equalTo(item_code)
+                 .addListenerForSingleValueEvent(new ValueEventListener() {
+                     @Override
+                     public void onDataChange(DataSnapshot dataSnapshot) {
+                         if (dataSnapshot.hasChildren()) {
+                             DataSnapshot firstChild
+                                 = dataSnapshot.getChildren()
+                                               .iterator()
+                                               .next();
+                             firstChild.getRef().removeValue();
+                         }
+                     }
+
+                     @Override
+                     public void onCancelled(DatabaseError databaseError) {
+                     }
+                });
+    }
+
     public void addToFirebaseCart() {
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
@@ -128,6 +155,33 @@ public class Item {
                      public void onDataChange(DataSnapshot dataSnapshot) {
                          if (!dataSnapshot.hasChildren()) {
                              dataSnapshot.getRef().push().setValue(Item.this);
+                         }
+                     }
+
+                     @Override
+                     public void onCancelled(DatabaseError databaseError) {
+                     }
+                });
+    }
+
+    public void removeFromFirebaseCart() {
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        DatabaseReference mDatabase
+                = FirebaseDatabase.getInstance().getReference();
+        String mUserId = mFirebaseUser.getUid();
+        mDatabase.child("users").child(mUserId).child("cart")
+                 .orderByChild("item_code")
+                 .equalTo(item_code)
+                 .addListenerForSingleValueEvent(new ValueEventListener() {
+                     @Override
+                     public void onDataChange(DataSnapshot dataSnapshot) {
+                         if (dataSnapshot.hasChildren()) {
+                             DataSnapshot firstChild
+                                 = dataSnapshot.getChildren()
+                                               .iterator()
+                                               .next();
+                             firstChild.getRef().removeValue();
                          }
                      }
 
