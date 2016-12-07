@@ -34,7 +34,7 @@ public class CartFragment extends Fragment {
     ArrayList<Item> itemList;
     CartItemsAdapter cartItemsAdapter;
     TextView tvTotal;
-    Button btnCheckout;
+    Button checkoutButton;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -66,13 +66,13 @@ public class CartFragment extends Fragment {
         Log.d("sup", "3");
         View v = inflater.inflate(R.layout.fragment_cart, container, false);
 
-        btnCheckout = (Button) v.findViewById(R.id.btnCheckout);
+       /* btnCheckout = (Button) v.findViewById(R.id.btnCheckout);
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 launchCheckout(view);
             }
-        });
+        });*/
 
         return v;
     }
@@ -81,6 +81,8 @@ public class CartFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         tvTotal = (TextView)view.findViewById(R.id.tvTotal);
         lvCart = (ListView)view.findViewById(R.id.lvCart);
+        checkoutButton = (Button) view.findViewById(R.id.btnCheckout);
+        checkoutButton.setEnabled(false);
         lvCart.setAdapter(cartItemsAdapter);
     }
 
@@ -95,7 +97,16 @@ public class CartFragment extends Fragment {
                 Item wishListItem
                     = new Item(dataSnapshot);
                 cartItemsAdapter.add(wishListItem);
+                cartItemsAdapter.notifyDataSetChanged();
                 updateTotal();
+                if(checkoutButton.isEnabled()) {
+                    checkoutButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    });
+                }
             }
 
             @Override
@@ -129,6 +140,12 @@ public class CartFragment extends Fragment {
 
     private void updateTotal() {
         double total = Item.getTotal(itemList);
+        //make button enabled
+        if(total > 0) {
+            checkoutButton.setEnabled(true);
+        }else {
+            checkoutButton.setEnabled(false);
+        }
         tvTotal.setText("$" + total);
     }
 

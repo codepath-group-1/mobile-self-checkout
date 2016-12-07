@@ -34,10 +34,10 @@
             android:textSize="20sp" />
 
         <Button
+            android:id="@+id/btnCheckout"
             android:text="Checkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btnCheckout"
             android:layout_below="@+id/tvTotal"
             android:background="@color/colorAccent"/>
 
