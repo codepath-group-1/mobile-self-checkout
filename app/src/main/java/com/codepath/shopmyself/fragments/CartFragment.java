@@ -68,15 +68,6 @@ public class CartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d("sup", "3");
         View v = inflater.inflate(R.layout.fragment_cart, container, false);
-
-       /* btnCheckout = (Button) v.findViewById(R.id.btnCheckout);
-        btnCheckout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launchCheckout(view);
-            }
-        });*/
-
         return v;
     }
 
@@ -154,7 +145,7 @@ public class CartFragment extends Fragment {
         }else {
             checkoutButton.setEnabled(false);
         }
-        tvTotal.setText("$" + total);
+        tvTotal.setText("$" + String.format("%.2f", total));
     }
 
 

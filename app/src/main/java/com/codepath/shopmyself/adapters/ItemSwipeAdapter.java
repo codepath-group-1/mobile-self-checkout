@@ -51,7 +51,7 @@ public class ItemSwipeAdapter extends ArrayAdapter<Item> {
 
         Glide.with(getContext()).load(item.getItem_image_url()).into(viewHolder.ivItemImage);
         viewHolder.tvItemName.setText(item.getItem_name());
-        viewHolder.tvItemPrice.setText("$" + item.getItem_price());
+        viewHolder.tvItemPrice.setText("$" + String.format("%.2f",item.getItem_price()));
 
         return convertView;
     }

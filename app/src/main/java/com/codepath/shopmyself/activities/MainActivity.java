@@ -167,10 +167,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.action_other) {
+
+            Intent i = new Intent(MainActivity.this, PaymentDetailsActivity.class);
+            startActivity(i);
+
+           /*
             long upc = 38000786693L;
             Intent i = new Intent(MainActivity.this, ProductDetailsActivity.class);
             i.putExtra("upc", upc);
-            startActivity(i);
+            startActivity(i);*/
         }
 
         return super.onOptionsItemSelected(item);

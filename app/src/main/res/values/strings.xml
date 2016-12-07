@@ -26,5 +26,7 @@
     <string name="cart">Cart</string>
     <string name="scan_barode">Scan Barcode</string>
     <string name="move_to_cart">MOVE TO CART</string>
+    <string name="confirmation">Confirm</string>
+    <string name="checkout_title">Checkout</string>
 
 </resources>
