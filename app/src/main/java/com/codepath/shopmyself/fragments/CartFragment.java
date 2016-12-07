@@ -1,5 +1,6 @@
 package com.codepath.shopmyself.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,10 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.codepath.shopmyself.R;
+import com.codepath.shopmyself.activities.PaymentDetailsActivity;
 import com.codepath.shopmyself.adapters.CartItemsAdapter;
 import com.codepath.shopmyself.models.Item;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,12 +26,15 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+import static android.content.ContentValues.TAG;
+
 public class CartFragment extends Fragment {
 
     ListView lvCart;
     ArrayList<Item> itemList;
     CartItemsAdapter cartItemsAdapter;
     TextView tvTotal;
+    Button btnCheckout;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -59,6 +65,14 @@ public class CartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d("sup", "3");
         View v = inflater.inflate(R.layout.fragment_cart, container, false);
+
+        btnCheckout = (Button) v.findViewById(R.id.btnCheckout);
+        btnCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchCheckout(view);
+            }
+        });
 
         return v;
     }
@@ -117,4 +131,19 @@ public class CartFragment extends Fragment {
         double total = Item.getTotal(itemList);
         tvTotal.setText("$" + total);
     }
+
+
+    public void launchCheckout(View v) {
+        Log.d("sup:", "launchCheckout");
+        if (itemList.size() == 0) {
+            Log.d(TAG, "no Items in cart");
+            return;
+        }
+
+        Intent i = new Intent(getActivity(), PaymentDetailsActivity.class);
+        startActivity(i);
+    }
+
 }
+
+

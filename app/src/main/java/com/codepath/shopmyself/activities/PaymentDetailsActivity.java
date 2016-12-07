@@ -2,8 +2,13 @@ package com.codepath.shopmyself.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.models.CreditCard;
@@ -13,15 +18,34 @@ import com.vinaygaba.creditcardview.CreditCardView;
 public class PaymentDetailsActivity extends AppCompatActivity {
 
     CreditCardView creditCardView;
-    CreditCard savedCard;
+    EditText cardNameLocal;
+    EditText cardNumberLocal;
+    ImageView typeLocal;
+    ImageView brandLogoLocal;
+    ImageView chipLocal;
+    EditText expiryDateLocal;
 
+    CreditCard savedCard;
+    CheckBox cbSaveCard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_details);
-        creditCardView = (CreditCardView)findViewById(R.id.card_name1);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        creditCardView = (CreditCardView) findViewById(R.id.card_name1);
+        cardNameLocal = (EditText) findViewById(com.vinaygaba.creditcardview.R.id.card_name);
+        cardNumberLocal = (EditText) findViewById(com.vinaygaba.creditcardview.R.id.card_number);
+        typeLocal = (ImageView) findViewById(com.vinaygaba.creditcardview.R.id.card_logo);
+        brandLogoLocal = (ImageView) findViewById(com.vinaygaba.creditcardview.R.id.brand_logo);
+        chipLocal = (ImageView) findViewById(com.vinaygaba.creditcardview.R.id.chip);
+        expiryDateLocal = (EditText) findViewById(com.vinaygaba.creditcardview.R.id.expiry_date);
 
         savedCard = CreditCard.getInstance();
+        cbSaveCard = (CheckBox) findViewById(R.id.cbSaveCard);
 
         if(savedCard != null) {
             Log.d("sup:", "savedCard name: " + savedCard.getCardName());
@@ -29,26 +53,34 @@ public class PaymentDetailsActivity extends AppCompatActivity {
             creditCardView.setCardNumber(savedCard.getCardNumber());
             creditCardView.setExpiryDate(savedCard.getCardExpiry());
             creditCardView.setType(CardType.VISA);
+            refreshCard(creditCardView);
         }
     }
 
-    public void saveCreditCard (View v) {
+    public void saveCreditCardPay (View v) {
 
-        String cardNumber = creditCardView.getCardNumber();
-        String cardName = creditCardView.getCardName();
-        String expiryDate = creditCardView.getExpiryDate();
-        savedCard = new CreditCard(cardNumber, expiryDate, cardName);
-        CreditCard.setInstance(savedCard);
-        Log.d("Credit Card", "Credit Card info saved");
+        if(cbSaveCard.isChecked()) {
 
-        // TODO: save the card1 with userdetails
-        backToPrevActivity();
+            String cardNumber = creditCardView.getCardNumber();
+            String cardName = creditCardView.getCardName();
+            String expiryDate = creditCardView.getExpiryDate();
+            savedCard = new CreditCard(cardNumber, expiryDate, cardName);
+            CreditCard.setInstance(savedCard);
+            Log.d("Credit Card", "Credit Card info saved");
+            Toast.makeText(this, "Credit Card info saved" , Toast.LENGTH_SHORT).show();
+        }
+
+        launchCheckout();
     }
 
-    public void backToPrevActivity () {
-        this.onBackPressed();
+    public void refreshCard(CreditCardView ccView) {
+        cardNameLocal.setText(ccView.getCardName());
+        cardNumberLocal.setText(ccView.getCardNumber());
+        expiryDateLocal.setText(ccView.getExpiryDate());
     }
 
-
+    public  void launchCheckout() {
+        // Launch Checkout here
+    }
 }
 
