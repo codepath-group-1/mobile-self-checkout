@@ -13,7 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.codepath.shopmyself.R;
-import com.codepath.shopmyself.activities.PaymentDetailsActivity;
 import com.codepath.shopmyself.activities.CheckoutActivity;
 import com.codepath.shopmyself.adapters.CartItemsAdapter;
 import com.codepath.shopmyself.models.Item;
@@ -29,8 +28,6 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
-import static android.content.ContentValues.TAG;
-
 public class CartFragment extends Fragment {
 
     ListView lvCart;
@@ -44,6 +41,8 @@ public class CartFragment extends Fragment {
 
     private DatabaseReference mDatabase;
     private String mUserId;
+    private double total = 0;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,9 +97,10 @@ public class CartFragment extends Fragment {
                         @Override
                         public void onClick(View view) {
                             //check if list has content
-                            if(itemList != null) {
+                            if(itemList != null && total > 0) {
                                 Intent intent = new Intent(getActivity(), CheckoutActivity.class);
                                 intent.putExtra("itemList", Parcels.wrap(itemList));
+                                intent.putExtra("total", total);
                                 startActivity(intent);
                             }
                         }
@@ -138,7 +138,7 @@ public class CartFragment extends Fragment {
     }
 
     private void updateTotal() {
-        double total = Item.getTotal(itemList);
+        total = Item.getTotal(itemList);
         //make button enabled
         if(total > 0) {
             checkoutButton.setEnabled(true);
@@ -149,7 +149,7 @@ public class CartFragment extends Fragment {
     }
 
 
-    public void launchCheckout(View v) {
+    /*public void launchCheckout(View v) {
         Log.d("sup:", "launchCheckout");
         if (itemList.size() == 0) {
             Log.d(TAG, "no Items in cart");
@@ -158,7 +158,7 @@ public class CartFragment extends Fragment {
 
         Intent i = new Intent(getActivity(), PaymentDetailsActivity.class);
         startActivity(i);
-    }
+    }*/
 
 }
 

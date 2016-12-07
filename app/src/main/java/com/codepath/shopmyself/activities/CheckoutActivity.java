@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.shopmyself.R;
@@ -34,6 +36,11 @@ public class CheckoutActivity extends AppCompatActivity {
     CheckBox cbSaveCard;
 
     ArrayList<Item> itemArrayList;
+
+    Button btnConfirmation;
+    TextView tvTotalPrice;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +50,9 @@ public class CheckoutActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         itemArrayList = Parcels.unwrap(getIntent().getParcelableExtra("itemList"));
+
+        btnConfirmation = (Button) findViewById(R.id.btnConfirmation);
+        tvTotalPrice = (TextView) findViewById(R.id.tvTotalAmount);
 
         creditCardView = (CreditCardView) findViewById(R.id.card_name1);
         cardNameLocal = (EditText) findViewById(com.vinaygaba.creditcardview.R.id.card_name);
