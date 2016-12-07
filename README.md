@@ -37,7 +37,7 @@ The following **optional** features are implemented:
 ## Demo
 
 Here's a walkthrough of implemented user stories:
-[Video Walkthrough](https://www.youtube.com/watch?v=GLBM-0IERUw) created with [Youtube](https://www.youtube.com/watch?v=GLBM-0IERUw)
+[Video Walkthrough](https://www.youtube.com/watch?v=Cz5Z7iZGdn8) created with [Youtube](https://www.youtube.com/watch?v=Cz5Z7iZGdn8)
 
 ## Wireframes
 
