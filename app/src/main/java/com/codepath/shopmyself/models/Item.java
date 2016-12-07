@@ -14,6 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import java.util.Map;
  * Created by supsingh on 11/11/2016.
  */
 
+@Parcel
 public class Item {
 
     public long getItem_code() {
