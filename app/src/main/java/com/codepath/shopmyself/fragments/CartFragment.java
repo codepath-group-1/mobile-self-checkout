@@ -1,5 +1,6 @@
 package com.codepath.shopmyself.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.codepath.shopmyself.R;
+import com.codepath.shopmyself.activities.CheckoutActivity;
 import com.codepath.shopmyself.adapters.CartItemsAdapter;
 import com.codepath.shopmyself.models.Item;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +23,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -91,7 +95,12 @@ public class CartFragment extends Fragment {
                     checkoutButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
+                            //check if list has content
+                            if(itemList != null) {
+                                Intent intent = new Intent(getActivity(), CheckoutActivity.class);
+                                intent.putExtra("itemList", Parcels.wrap(itemList));
+                                startActivity(intent);
+                            }
                         }
                     });
                 }
