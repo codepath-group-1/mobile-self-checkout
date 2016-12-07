@@ -10,30 +10,28 @@ The following **required** functionality is completed:
 * [x] When barcode is scanned, user is taken to a detailed screen of the item.
   * [x] Item is shown with title, image, and a short description.
   * [x] User can add to wishlist, cart, or cancel.
-  * [ ] When adding to wishlist, user is taken to the wishlist screen.
-    * [ ] Item is not added if it already exists in wishlist.
-  * [ ] When adding to the cart, user is taken to the cart screen.
-    * [ ] Item is not added if it already exists in cart.
+  * [x] When adding to wishlist, user is taken to the wishlist screen.
+    * [x] Item is not added if it already exists in wishlist.
+  * [x] When adding to the cart, user is taken to the cart screen.
+    * [x] Item is not added if it already exists in cart.
 * [x] User can keep a list of items in the wishlist.
-  * [ ] User can click on item in the wishlist and be taken to the detailed screen of the item.
-* [ ] User can keep a list of items in the cart.
-  * [ ] User can change quantity of each item by entering number.
-* [ ] User can click on checkout from the cart screen to get to the payment screen.
+* [x] User can keep a list of items in the cart.
+* [x] User can click on checkout from the cart screen to get to the payment screen.
 * [x] User can type in payment information on the payment screen and click confirm to be taken to the receipt screen.
-* [ ] The receipt screen shows items purchased, cost, and totals.
-  * [ ] From the receipt screen, user can go back to the cart screen. Cart is emptied out.
+* [x] The receipt screen shows items purchased, cost, and totals.
+  * [x] From the receipt screen, user can go back to the cart screen. Cart is emptied out.
 
 The following **optional** features are implemented:
 
-* [ ] User can turn on flashlight on and off during barcode scan.
-* [ ] User can view history (a list) of previously scanned barcodes and select them as the scanned product.
+* [x] User can turn on flashlight on and off during barcode scan.
+* [x] User can view history (a list) of previously scanned barcodes and select them as the scanned product.
   * [x] When item is selected, user is taken to the detailed screen of the item.
 * [ ] User can select an image of a barcode from their image gallery.
   * [ ] When image is selected, user is taken to the detailed screen of the item.
   * [ ] User can select which album to choose images from.
   * [ ] User can take an image of a barcode to use as the selected item.
 * [ ] User can change quantity of each item in the cart using a + and - button.
-* [ ] User can see a history of orders made.
+* [x] User can see a history of orders made.
 * [x] User can save payment information.
 
 ## Demo
