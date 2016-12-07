@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ public class CartFragment extends Fragment {
     ArrayList<Item> itemList;
     CartItemsAdapter cartItemsAdapter;
     TextView tvTotal;
+    Button checkoutButton;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -67,6 +69,8 @@ public class CartFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         tvTotal = (TextView)view.findViewById(R.id.tvTotal);
         lvCart = (ListView)view.findViewById(R.id.lvCart);
+        checkoutButton = (Button) view.findViewById(R.id.btnCheckout);
+        checkoutButton.setEnabled(false);
         lvCart.setAdapter(cartItemsAdapter);
     }
 
@@ -81,7 +85,16 @@ public class CartFragment extends Fragment {
                 Item wishListItem
                     = new Item(dataSnapshot);
                 cartItemsAdapter.add(wishListItem);
+                cartItemsAdapter.notifyDataSetChanged();
                 updateTotal();
+                if(checkoutButton.isEnabled()) {
+                    checkoutButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    });
+                }
             }
 
             @Override
@@ -115,6 +128,12 @@ public class CartFragment extends Fragment {
 
     private void updateTotal() {
         double total = Item.getTotal(itemList);
+        //make button enabled
+        if(total > 0) {
+            checkoutButton.setEnabled(true);
+        }else {
+            checkoutButton.setEnabled(false);
+        }
         tvTotal.setText("$" + total);
     }
 }
