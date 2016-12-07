@@ -28,5 +28,7 @@
     <string name="move_to_cart">MOVE TO CART</string>
     <string name="confirmation">Confirm</string>
     <string name="checkout_title">Checkout</string>
+    <string name="Total_Title">Total</string>
+    <string name="Total_Amount">N/A</string>
 
 </resources>
