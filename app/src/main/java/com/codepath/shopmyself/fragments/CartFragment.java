@@ -100,7 +100,9 @@ public class CartFragment extends Fragment {
                             if(itemList != null && total > 0) {
                                 Intent intent = new Intent(getActivity(), CheckoutActivity.class);
                                 intent.putExtra("itemList", Parcels.wrap(itemList));
-                                intent.putExtra("total", total);
+                                Bundle bundle = new Bundle();
+                                bundle.putDouble("total", total);
+                                intent.putExtras(bundle);
                                 startActivity(intent);
                             }
                         }
