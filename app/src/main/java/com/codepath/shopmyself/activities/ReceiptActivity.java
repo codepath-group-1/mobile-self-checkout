@@ -68,26 +68,6 @@ public class ReceiptActivity extends AppCompatActivity {
         tvTotalPrice.setText(String.format("$%.2f", total));
 
 
-        //  ----------------------- DO NOT REMOVE  --------------------------
-
-        /*rvReceipt = (RecyclerView) findViewById(R.id.rvReceipt);
-
-        // Create adapter passing in the items data
-        ReceiptAdapter adapter = new ReceiptAdapter(this, items);
-
-        // Attach the adapter to the recyclerview to populate items
-        rvReceipt.setAdapter(adapter);
-
-        // Set layout manager to position the items
-        LinearLayoutManager linearLayout = new LinearLayoutManager(this);
-        rvReceipt.setLayoutManager(linearLayout);
-
-        RecyclerView.ItemDecoration itemDecoration = new
-                DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        rvReceipt.addItemDecoration(itemDecoration); */
-
-        //  --------------------- DO NOT REMOVE ---------------------------------
-
         //call ballon animation
        balloonAnimator(ivBalloons);
     }
