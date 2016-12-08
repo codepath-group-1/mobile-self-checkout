@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_layout_receipt">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout4"
@@ -22,14 +23,40 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvReceipt"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="130dp"
+        android:layout_below="@id/appBarLayout4"
+        android:layout_marginTop="10dp"/>
 
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/ivBalloons"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:srcCompat="@drawable/balloons"
+        android:layout_below="@id/rvReceipt"/>
+
+    <TextView
+        android:id="@+id/tvReceiptTotalNumberOf"
+        android:layout_below="@id/rvReceipt"
+        android:text="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/balloons"/>
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="50dp"/>
+
+    <TextView
+        android:id="@+id/tvReceiptPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$0.00"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="130dp"
+        android:layout_marginStart="130dp"
+        android:layout_alignParentTop="true" /> -->
+
 
 
 </RelativeLayout>

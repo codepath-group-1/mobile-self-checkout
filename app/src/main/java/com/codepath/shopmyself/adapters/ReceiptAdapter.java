@@ -76,10 +76,10 @@ public class ReceiptAdapter extends
 
         // Set item views based on your views and data model
         TextView tvPrice = viewHolder.receiptItemPrice;
-        tvPrice.setText(String.format("%.2f", item.getItem_price()));
+        tvPrice.setText(String.format("$%.2f", item.getItem_price()));
 
         TextView tvNumberOf = viewHolder.receiptNumberOf;
-        tvNumberOf.setText(String.format("X%d", item.getItem_quantity()));
+        tvNumberOf.setText(String.format("x%d", item.getItem_quantity()));
 
         TextView tvName = viewHolder.receiptItemName;
         tvName.setText(item.getItem_name());

@@ -53,7 +53,7 @@ public class WishListArrayAdapter extends ArrayAdapter<Item> {
                       .findViewById(R.id.btnMoveToCart);
             viewHolder.ibWishLishDeleteButton
                     = (ImageButton)convertView
-                      .findViewById(R.id.ibWishLishDeleteButton);
+                      .findViewById(R.id.ibWishListDeleteButton);
 
             convertView.setTag(viewHolder);
         } else {

@@ -38,14 +38,14 @@
         android:src="@drawable/ic_add_to_cart"
         android:id="@+id/btnMoveToCart"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/ibWishLishDeleteButton"
-        android:layout_alignBottom="@+id/ivWishListItemImage" />
+        android:layout_toLeftOf="@+id/ibWishListDeleteButton"
+        android:layout_alignBottom="@+id/ivWishListItemImage"/>
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_delete_black_24dp"
-        android:id="@+id/ibWishLishDeleteButton"
+        android:id="@+id/ibWishListDeleteButton"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@+id/btnMoveToCart" />

@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <ImageView
         android:id="@+id/ivReceiptItemImage"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:contentDescription="Receipt item image"
         app:srcCompat="@mipmap/ic_launcher"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/border" />
+        android:background="@drawable/border"
+        android:layout_marginLeft="3dp"
+        android:layout_marginStart="3dp"/>
 
 
     <TextView
         android:id="@+id/tvReceiptItemName"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="Item Name"
-        android:textSize="12dp"
         android:textColor="@color/black"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
         android:layout_toRightOf="@id/ivReceiptItemImage"/>
-
 
 
     <TextView
@@ -33,22 +33,22 @@
         android:layout_toRightOf="@id/tvReceiptItemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12dp"
+        android:textSize="16dp"
         android:textColor="@color/black"
-        android:layout_marginLeft="50dp"
-        android:layout_marginStart="50dp"/>
+        android:layout_marginLeft="85dp"
+        android:layout_marginStart="85dp"/>
 
 
     <TextView
         android:id="@+id/tvReceiptItemPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tvReceiptNumberOf"
+        android:layout_toRightOf="@id/tvReceiptItemName"
         android:text="$0.00"
-        android:textSize="12dp"
+        android:textSize="16dp"
         android:textColor="@color/black"
-        android:layout_marginLeft="120dp"
-        android:layout_marginStart="120dp"
+        android:layout_marginLeft="125dp"
+        android:layout_marginStart="125dp"
         android:layout_alignParentTop="true" />
 
 </RelativeLayout>
