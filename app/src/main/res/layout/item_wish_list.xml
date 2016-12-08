@@ -38,7 +38,9 @@
         android:id="@+id/btnMoveToCart"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/ibWishLishDeleteButton"
-        android:layout_alignBottom="@+id/ivWishListItemImage"/>
+        android:layout_alignBottom="@+id/ivWishListItemImage"
+        android:background="@color/colorAccent"
+        style="@style/Widget.AppCompat.Button" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -47,6 +49,6 @@
         android:id="@+id/ibWishLishDeleteButton"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignBottom="@+id/btnMoveToCart"/>
+        android:layout_alignBottom="@+id/btnMoveToCart" />
 
 </RelativeLayout>
