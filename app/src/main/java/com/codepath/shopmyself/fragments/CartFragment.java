@@ -42,6 +42,7 @@ public class CartFragment extends Fragment {
     private DatabaseReference mDatabase;
     private String mUserId;
     private double total = 0;
+    private int itemCount = 0;
 
 
     @Override
@@ -102,6 +103,7 @@ public class CartFragment extends Fragment {
                                 intent.putExtra("itemList", Parcels.wrap(itemList));
                                 Bundle bundle = new Bundle();
                                 bundle.putDouble("total", total);
+                                bundle.putInt("count", itemCount);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                             }
@@ -141,13 +143,14 @@ public class CartFragment extends Fragment {
 
     private void updateTotal() {
         total = Item.getTotal(itemList);
+        itemCount = Item.getSize(itemList);
         //make button enabled
         if(total > 0) {
             checkoutButton.setEnabled(true);
         }else {
             checkoutButton.setEnabled(false);
         }
-        tvTotal.setText("$" + String.format("%.2f", total));
+        tvTotal.setText("(" + itemCount + " Items) - $" + String.format("%.2f", total));
     }
 
 

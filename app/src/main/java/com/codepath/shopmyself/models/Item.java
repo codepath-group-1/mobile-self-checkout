@@ -267,4 +267,7 @@ public class Item {
         }
         return total;
     }
+    public static int getSize(List<Item> items) {
+        return items.size();
+    }
 }

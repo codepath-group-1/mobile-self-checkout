@@ -48,6 +48,7 @@ public class CheckoutActivity extends AppCompatActivity {
     TextView tvTotalPrice;
 
     double total;
+    int count;
 
 
     @Override
@@ -61,13 +62,14 @@ public class CheckoutActivity extends AppCompatActivity {
         //getting cart information from intents
         itemArrayList = Parcels.unwrap(getIntent().getParcelableExtra("itemList"));
         total = getIntent().getExtras().getDouble("total");
+        count = getIntent().getExtras().getInt("count");
 
         btnConfirmation = (Button) findViewById(R.id.btnConfirmation);
         btnConfirmation.setEnabled(false);
         tvTotalPrice = (TextView) findViewById(R.id.tvTotalAmount);
 
         //set total price in text view
-        tvTotalPrice.setText(String.format("$%.2f", total));
+        tvTotalPrice.setText("(" + count + " Items) - " + String.format("$%.2f", total));
 
         creditCardView = (CreditCardView) findViewById(R.id.card_name1);
         cardNameLocal = (EditText) findViewById(com.vinaygaba.creditcardview.R.id.card_name);
