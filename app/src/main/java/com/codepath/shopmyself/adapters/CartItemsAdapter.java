@@ -48,7 +48,7 @@ public class CartItemsAdapter extends ArrayAdapter<Item> {
         viewHolder = (ViewHolder) convertView.getTag();
         Glide.with(getContext()).load(item.getItem_image_url()).into(viewHolder.ivItemImage);
         viewHolder.tvItemName.setText(item.getItem_name());
-        viewHolder.tvItemPrice.setText("$" + item.getItem_price());
+        viewHolder.tvItemPrice.setText("$" + String.format("%.2f", item.getItem_price()));
         viewHolder.ibDeleteButton.setTag(item);
         viewHolder.ibDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
