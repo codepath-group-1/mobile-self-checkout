@@ -4,18 +4,18 @@ package com.codepath.shopmyself.activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.codepath.shopmyself.R;
-import com.codepath.shopmyself.adapters.ReceiptAdapter;
+import com.codepath.shopmyself.adapters.ReceiptArrayAdapter;
 import com.codepath.shopmyself.models.Item;
 
 import org.parceler.Parcels;
@@ -27,8 +27,8 @@ public class ReceiptActivity extends AppCompatActivity {
     ImageView ivBalloons;
     RecyclerView rvReceipt;
     ArrayList<Item> items;
-    //TextView tvNumberOf;
-    //TextView tvTotalPrice;
+    TextView tvNumberOf;
+    TextView tvTotalPrice;
     double total;
 
 
@@ -40,19 +40,30 @@ public class ReceiptActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //tvNumberOf = (TextView) findViewById(R.id.tvReceiptTotalNumberOf);
-        //tvTotalPrice = (TextView) findViewById(R.id.tvReceiptPrice);
-
-       // ivBalloons = (ImageView) findViewById(R.id.ivBalloons);
-        //ivBalloons.setVisibility(View.INVISIBLE); //set ballons to invisible at first
-        rvReceipt = (RecyclerView) findViewById(R.id.rvReceipt);
-
         //getting cart information from intents
         items = Parcels.unwrap(getIntent().getParcelableExtra("itemList"));
         total = getIntent().getExtras().getDouble("total");
 
-        //tvNumberOf.setText(String.valueOf(items.size()));
-        //tvTotalPrice.setText(String.format("$%.2f", total));
+
+        ReceiptArrayAdapter itemsAdapter = new ReceiptArrayAdapter(this, items);
+
+        // Attach the adapter to a ListView
+        ListView listView = (ListView) findViewById(R.id.lvReceipt);
+        listView.setAdapter(itemsAdapter);
+
+        tvNumberOf = (TextView) findViewById(R.id.tvReceiptTotalNumberOf);
+        tvTotalPrice = (TextView) findViewById(R.id.tvReceiptPrice);
+
+        ivBalloons = (ImageView) findViewById(R.id.ivBalloons);
+        ivBalloons.setVisibility(View.INVISIBLE); //set ballons to invisible at first
+
+        tvNumberOf.setText(String.valueOf(items.size()));
+        tvTotalPrice.setText(String.format("$%.2f", total));
+
+
+        //  ----------------------- DO NOT REMOVE  --------------------------
+
+        /*rvReceipt = (RecyclerView) findViewById(R.id.rvReceipt);
 
         // Create adapter passing in the items data
         ReceiptAdapter adapter = new ReceiptAdapter(this, items);
@@ -66,10 +77,12 @@ public class ReceiptActivity extends AppCompatActivity {
 
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        rvReceipt.addItemDecoration(itemDecoration);
+        rvReceipt.addItemDecoration(itemDecoration); */
+
+        //  --------------------- DO NOT REMOVE ---------------------------------
 
         //call ballon animation
-       // balloonAnimator(ivBalloons);
+       balloonAnimator(ivBalloons);
     }
 
     private void balloonAnimator(View view) {

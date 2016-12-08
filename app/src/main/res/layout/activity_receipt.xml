@@ -20,31 +20,31 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvReceipt"
+    <ListView
+        android:id="@+id/lvReceipt"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_below="@id/appBarLayout4"
-        android:layout_marginTop="10dp"/>
+        android:layout_height="440dp"
+        android:layout_below="@+id/appBarLayout4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+    </ListView>
 
-
-    <!--<ImageView
+    <ImageView
         android:id="@+id/ivBalloons"
         android:layout_width="15dp"
         android:layout_height="15dp"
-        app:srcCompat="@drawable/balloons"
-        android:layout_below="@id/rvReceipt"/>
+        app:srcCompat="@drawable/balloons"/>
 
     <TextView
-        android:id="@+id/tvReceiptTotalNumberOf"
-        android:layout_below="@id/rvReceipt"
-        android:text="1"
+        android:id="@+id/tvReceiptPriceTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16dp"
         android:textColor="@color/black"
-        android:layout_marginLeft="5dp"
-        android:layout_marginStart="50dp"/>
+        android:textSize="16dp"
+        android:text="@string/Total_Title"
+        android:layout_below="@id/lvReceipt"
+        android:layout_marginLeft="90dp"
+        android:layout_marginStart="90dp"/>
 
     <TextView
         android:id="@+id/tvReceiptPrice"
@@ -53,10 +53,43 @@
         android:text="$0.00"
         android:textSize="16dp"
         android:textColor="@color/black"
-        android:layout_marginLeft="130dp"
-        android:layout_marginStart="130dp"
-        android:layout_alignParentTop="true" /> -->
+        android:layout_toRightOf="@+id/tvReceiptPriceTitle"
+        android:layout_below="@id/lvReceipt"
+        android:layout_marginLeft="120dp"
+        android:layout_marginStart="120dp"/>
+
+    <TextView
+        android:id="@+id/tvReceiptTotalNumberOfTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:text="@string/Total_Number_Of"
+        android:layout_below="@id/tvReceiptPriceTitle"
+        android:layout_marginLeft="90dp"
+        android:layout_marginStart="90dp"/>
 
 
+    <TextView
+        android:id="@+id/tvReceiptTotalNumberOf"
+        android:text="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="119dp"
+        android:layout_marginStart="119dp"
+        android:layout_toRightOf="@id/tvReceiptTotalNumberOfTitle"
+        android:layout_below="@id/tvReceiptPrice"/>
 
 </RelativeLayout>
+
+    <!--
+      ******** DO NOT REMOVE ********
+     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_below="@id/appBarLayout4"
+        android:layout_marginTop="10dp"/> -->
+
