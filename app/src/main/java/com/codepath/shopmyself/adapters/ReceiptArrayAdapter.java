@@ -37,7 +37,7 @@ public class ReceiptArrayAdapter extends ArrayAdapter<Item> {
         tvPrice.setText(String.format("$%.2f", item.getItem_price()));
 
         TextView tvNumberOf = (TextView) convertView.findViewById(R.id.tvReceiptNumberOf);
-        tvNumberOf.setText(String.format("x%d", item.getItem_quantity()));
+        tvNumberOf.setText(String.format("x%d", 1));
 
         TextView tvName = (TextView) convertView.findViewById(R.id.tvReceiptItemName);
         tvName.setText(item.getItem_name());

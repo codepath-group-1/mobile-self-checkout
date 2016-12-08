@@ -1,12 +1,17 @@
 package com.codepath.shopmyself.activities;
 
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
@@ -21,6 +26,8 @@ import com.codepath.shopmyself.models.Item;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+
+import static android.graphics.Color.WHITE;
 
 public class ReceiptActivity extends AppCompatActivity {
 
@@ -83,6 +90,35 @@ public class ReceiptActivity extends AppCompatActivity {
 
         //call ballon animation
        balloonAnimator(ivBalloons);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_receipt, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem closingMenuItem = menu.findItem(R.id.menu_closer);
+        tintMenuIcon(this,closingMenuItem, WHITE);
+        return true;
+    }
+
+    //setting color of x in appbar to white
+    public static void tintMenuIcon(Context context, MenuItem item, int color) {
+        Drawable normalDrawable = item.getIcon();
+        Drawable wrapDrawable = DrawableCompat.wrap(normalDrawable);
+        DrawableCompat.setTint(wrapDrawable, color);
+
+        item.setIcon(wrapDrawable);
+    }
+
+
+    public void onCloseReceipt(MenuItem mi) {
+        // handle click here
     }
 
     private void balloonAnimator(View view) {
