@@ -31,16 +31,15 @@
         android:layout_toRightOf="@+id/ivWishListItemImage"
         android:layout_toEndOf="@+id/ivWishListItemImage"/>
 
-    <Button
-        android:text="@string/move_to_cart"
+    <ImageButton
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_to_cart"
         android:id="@+id/btnMoveToCart"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/ibWishLishDeleteButton"
-        android:layout_alignBottom="@+id/ivWishListItemImage"
-        android:background="@color/colorAccent"
-        style="@style/Widget.AppCompat.Button" />
+        android:layout_alignBottom="@+id/ivWishListItemImage" />
 
     <ImageButton
         android:layout_width="wrap_content"

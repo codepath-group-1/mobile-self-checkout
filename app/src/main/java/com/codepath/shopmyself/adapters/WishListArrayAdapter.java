@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +21,7 @@ public class WishListArrayAdapter extends ArrayAdapter<Item> {
     private static class ViewHolder {
         ImageView ivWishListItemImage;
         TextView tvWishListItemName;
-        Button btnMoveToCart;
+        ImageButton btnMoveToCart;
         ImageButton ibWishLishDeleteButton;
     }
 
@@ -50,7 +49,7 @@ public class WishListArrayAdapter extends ArrayAdapter<Item> {
                     = (TextView)convertView
                       .findViewById(R.id.tvWishListItemName);
             viewHolder.btnMoveToCart
-                    = (Button)convertView
+                    = (ImageButton)convertView
                       .findViewById(R.id.btnMoveToCart);
             viewHolder.ibWishLishDeleteButton
                     = (ImageButton)convertView
