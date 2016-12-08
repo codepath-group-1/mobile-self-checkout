@@ -172,7 +172,7 @@ public class Item {
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
         DatabaseReference mDatabase
-                = FirebaseDatabase.getInstance().getReference();
+            = FirebaseDatabase.getInstance().getReference();
         String mUserId = mFirebaseUser.getUid();
         mDatabase.child("users").child(mUserId).child("cart")
                  .orderByChild("item_code")
@@ -193,6 +193,25 @@ public class Item {
                      public void onCancelled(DatabaseError databaseError) {
                      }
                 });
+    }
+
+    public static void clearFirebaseCart() {
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        final DatabaseReference mDatabase
+            = FirebaseDatabase.getInstance().getReference();
+        String mUserId = mFirebaseUser.getUid();
+        mDatabase.child("users").child(mUserId).child("cart")
+                 .addListenerForSingleValueEvent(new ValueEventListener() {
+                     @Override
+                     public void onDataChange(DataSnapshot dataSnapshot) {
+                         dataSnapshot.getRef().removeValue();
+                     }
+
+                     @Override
+                     public void onCancelled(DatabaseError databaseError) {
+                     }
+                 });
     }
 
     public static void addCartToFirebaseReceipts() {
