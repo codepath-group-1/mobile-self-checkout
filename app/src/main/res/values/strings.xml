@@ -29,6 +29,6 @@
     <string name="confirmation">Confirm</string>
     <string name="checkout_title">Checkout</string>
     <string name="Total_Title">Total</string>
-    <string name="Total_Amount">N/A</string>
+    <string name="Total_Amount">$0.00</string>
 
 </resources>

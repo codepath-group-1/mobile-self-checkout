@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_checkout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,6 +24,103 @@
     </android.support.design.widget.AppBarLayout>
 
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:background="@color/zxing_transparent"
+        android:layout_below="@+id/appBarLayout4">
+
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cvTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tvTotalTitle"
+                android:text="@string/Total_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textSize="25dp"
+                android:textColor="@color/black"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"/>
+
+            <TextView
+                android:id="@+id/tvTotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/Total_Amount"
+                android:layout_alignParentRight="true"
+                android:textSize="25dp"
+                android:textColor="@color/black"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cvCreditCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnConfirmation"
+        android:layout_below="@+id/cvTotal"
+        android:layout_margin="10dp"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="3dp">
+
+       <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+           <com.vinaygaba.creditcardview.CreditCardView
+               android:id="@+id/card_name1"
+               android:layout_width="match_parent"
+               android:layout_height="225dp"
+               android:background="@drawable/cardbackground_world"
+               app:cardNumber=""
+               app:cardName=""
+               app:cardNumberTextColor="#cccccc"
+               app:cardNumberFormat="all_digits"
+               app:cardNameTextColor="#cccccc"
+               app:type="auto"
+               app:putChip="true"
+               app:expiryDate = ""
+               app:expiryDateTextColor="#cccccc"
+               app:isEditable="true"
+               app:validTillTextColor="#cccccc"
+               app:hintTextColor = "#cccccc" />
+
+           <CheckBox
+               android:id="@+id/cbSaveCard"
+               android:text="Save Card Details"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_below="@+id/card_name1"
+               android:layout_margin="5dp"/>
+
+      </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/btnConfirmation"
         android:text="@string/confirmation"
@@ -32,91 +130,5 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cvTotal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/appBarLayout4"
-        android:layout_marginTop="30dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingRight="12dp"
-            android:paddingLeft="12dp">
-
-            <TextView
-                android:id="@+id/tvTotalTitle"
-                android:text="@string/Total_Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="25dp"
-                android:textColor="@color/black"/>
-
-            <TextView
-                android:id="@+id/tvTotalAmount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="@string/Total_Amount"
-                android:layout_toRightOf="@id/tvTotalTitle"
-                android:layout_marginLeft="33dp"
-                android:layout_marginStart="200dp"
-                android:layout_marginTop="11dp"
-                android:textSize="15dp"
-                android:textColor="@color/black"/>
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cvCreditCard"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="90dp"
-        android:layout_above="@+id/btnConfirmation"
-        android:layout_below="@+id/cvTotal"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-       <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="274dp" android:paddingRight="10dp"
-           android:paddingLeft="10dp" >
-
-           <com.vinaygaba.creditcardview.CreditCardView
-               android:id="@+id/card_name1"
-               android:layout_width="match_parent"
-               android:layout_height="190dp"
-               android:background="@drawable/cardbackground_world"
-               android:layout_margin="16dp"
-               app:cardNumber="ENTER CARD NUMBER"
-               app:cardName="ENTER NAME"
-               app:cardNumberTextColor="#cccccc"
-               app:cardNumberFormat="all_digits"
-               app:cardNameTextColor="#cccccc"
-               app:type="auto"
-               app:putChip="true"
-               app:expiryDate = "00/00"
-               app:expiryDateTextColor="#cccccc"
-               app:isEditable="true"
-               app:validTillTextColor="#cccccc"
-               app:hintTextColor = "#cccccc"/>
-
-           <CheckBox
-               android:id="@+id/cbSaveCard"
-               android:text="Save Card Details"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_below="@+id/card_name1"
-               android:layout_marginRight="16dp"/>
-
-
-      </RelativeLayout>
-    </android.support.v7.widget.CardView>
 
 </RelativeLayout>
