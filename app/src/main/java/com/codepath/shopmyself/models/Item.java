@@ -195,6 +195,28 @@ public class Item {
                 });
     }
 
+    public static void addCartToFirebaseReceipts() {
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        final DatabaseReference mDatabase
+                = FirebaseDatabase.getInstance().getReference();
+        String mUserId = mFirebaseUser.getUid();
+
+        final DatabaseReference userRef = mDatabase.child("users").child(mUserId);
+        userRef.child("cart")
+               .addListenerForSingleValueEvent(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(DataSnapshot dataSnapshot) {
+                       userRef.child("receipts").push()
+                              .setValue(dataSnapshot.getValue());
+                   }
+
+                   @Override
+                   public void onCancelled(DatabaseError databaseError) {
+                   }
+              });
+    }
+
     @Override
     public String toString() {
         return "Item{" +
