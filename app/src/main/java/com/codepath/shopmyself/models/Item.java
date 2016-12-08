@@ -201,17 +201,7 @@ public class Item {
         final DatabaseReference mDatabase
             = FirebaseDatabase.getInstance().getReference();
         String mUserId = mFirebaseUser.getUid();
-        mDatabase.child("users").child(mUserId).child("cart")
-                 .addListenerForSingleValueEvent(new ValueEventListener() {
-                     @Override
-                     public void onDataChange(DataSnapshot dataSnapshot) {
-                         dataSnapshot.getRef().removeValue();
-                     }
-
-                     @Override
-                     public void onCancelled(DatabaseError databaseError) {
-                     }
-                 });
+        mDatabase.child("users").child(mUserId).child("cart").removeValue();
     }
 
     public static void addCartToFirebaseReceipts() {
