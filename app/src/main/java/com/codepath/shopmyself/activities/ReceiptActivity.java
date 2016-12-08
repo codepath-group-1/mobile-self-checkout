@@ -12,6 +12,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
 import com.codepath.shopmyself.R;
+import com.codepath.shopmyself.adapters.ReceiptAdapter;
 import com.codepath.shopmyself.models.Item;
 
 import org.parceler.Parcels;
@@ -19,7 +20,6 @@ import org.parceler.Parcels;
 import java.util.ArrayList;
 
 public class ReceiptActivity extends AppCompatActivity {
-
 
     ImageView ivBalloons;
     RecyclerView rvReceipt;
@@ -38,12 +38,19 @@ public class ReceiptActivity extends AppCompatActivity {
         ivBalloons = (ImageView) findViewById(R.id.ivBalloons);
         rvReceipt = (RecyclerView) findViewById(R.id.rvReceipt);
 
-        LinearLayoutManager linearLayout = new LinearLayoutManager(this);
-        rvReceipt.setLayoutManager(linearLayout);
-
         //getting cart information from intents
         items = Parcels.unwrap(getIntent().getParcelableExtra("itemList"));
         total = getIntent().getExtras().getDouble("total");
+
+        // Create adapter passing in the items data
+        ReceiptAdapter adapter = new ReceiptAdapter(this, items);
+
+        // Attach the adapter to the recyclerview to populate items
+        rvReceipt.setAdapter(adapter);
+
+        // Set layout manager to position the items
+        LinearLayoutManager linearLayout = new LinearLayoutManager(this);
+        rvReceipt.setLayoutManager(linearLayout);
 
         //call ballon animation
         balloonAnimator();
