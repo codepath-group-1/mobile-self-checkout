@@ -31,28 +31,26 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/tvSwipeTitle"
                     android:text="Item Name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:layout_margin="5dp"
-                    android:id="@+id/tvSwipeTitle"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/black"
                     android:textStyle="normal|bold"
-                    android:textSize="20sp"
-                    android:fontFamily="casual" />
+                    android:textSize="20dp"
+                    android:fontFamily="sans-serif" />
 
                 <TextView
+                    android:id="@+id/tvSwipePrice"
                     android:text="Item price"
                     android:layout_below="@+id/tvSwipeTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:layout_margin="5dp"
-                    android:id="@+id/tvSwipePrice"
-                    android:textSize="30sp"
+                    android:textSize="30dp"
                     android:textStyle="normal|bold"
                     android:textAlignment="center" />
 
