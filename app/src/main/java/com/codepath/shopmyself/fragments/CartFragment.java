@@ -153,18 +153,6 @@ public class CartFragment extends Fragment {
         tvTotal.setText("(" + itemCount + " Items) - $" + String.format("%.2f", total));
     }
 
-
-    /*public void launchCheckout(View v) {
-        Log.d("sup:", "launchCheckout");
-        if (itemList.size() == 0) {
-            Log.d(TAG, "no Items in cart");
-            return;
-        }
-
-        Intent i = new Intent(getActivity(), PaymentDetailsActivity.class);
-        startActivity(i);
-    }*/
-
 }
 
 
