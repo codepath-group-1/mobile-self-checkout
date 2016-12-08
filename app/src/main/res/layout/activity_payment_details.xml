@@ -57,7 +57,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnPay"
-        android:onClick="saveCreditCardPay"
         android:layout_alignRight="@+id/card_name1"
         android:layout_below="@+id/card_name1"/>
 

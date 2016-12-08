@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +34,10 @@ public class CheckoutActivity extends AppCompatActivity {
     ImageView brandLogoLocal;
     ImageView chipLocal;
     EditText expiryDateLocal;
+
+    int cardNumberCount;
+    int cardNameCount;
+    int expiryDateCount;
 
     CreditCard savedCard;
     CheckBox cbSaveCard;
@@ -71,6 +77,19 @@ public class CheckoutActivity extends AppCompatActivity {
         chipLocal = (ImageView) findViewById(com.vinaygaba.creditcardview.R.id.chip);
         expiryDateLocal = (EditText) findViewById(com.vinaygaba.creditcardview.R.id.expiry_date);
 
+        cardNameLocal.setHint("ENTER CARD NAME");
+        cardNumberLocal.setHint("ENTER CARD NUMBER");
+        expiryDateLocal.setHint("ENTER EXP DATE");
+
+        cardNumberCount = cardNumberLocal.getText().length();
+        cardNameCount = cardNameLocal.getText().length();
+        expiryDateCount = expiryDateLocal.getText().length();
+
+        // Listen for Text Change
+        setValidatorListeners();
+        // Listen for Confirmation Click
+        setConfirmationListener();
+
         savedCard = CreditCard.getInstance();
         cbSaveCard = (CheckBox) findViewById(R.id.cbSaveCard);
 
@@ -80,24 +99,34 @@ public class CheckoutActivity extends AppCompatActivity {
             creditCardView.setCardNumber(savedCard.getCardNumber());
             creditCardView.setExpiryDate(savedCard.getCardExpiry());
             creditCardView.setType(CardType.VISA);
+            if(savedCard.isInfosaved())
+                cbSaveCard.setChecked(true);
+
             refreshCard(creditCardView);
         }
 
-
-        if(creditCardView != null && itemArrayList != null) {
-
+        if (buttonOkToEnable()) {
             //set confirmation button clickable
             btnConfirmation.setEnabled(true);
-
-            //listen when confirmation button is clicked
-            confirmationListener();
         }
     }
 
-    public void confirmationListener() {
+    public boolean buttonOkToEnable () {
+        if(     creditCardView != null &&
+                itemArrayList != null &&
+                cardNameCount != 0 &&
+                cardNumberCount != 0 &&
+                expiryDateCount != 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public void setConfirmationListener() {
         btnConfirmation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                saveCreditCardPay();
                 Intent intent = new Intent(getApplicationContext(), ReceiptActivity.class);
                 intent.putExtra("itemList", Parcels.wrap(itemArrayList));
                 Bundle bundle = new Bundle();
@@ -110,20 +139,75 @@ public class CheckoutActivity extends AppCompatActivity {
         });
     }
 
-    public void saveCreditCardPay (View v) {
+    public void setValidatorListeners () {
+        cardNumberLocal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                cardNumberCount = charSequence.length();
+                if (buttonOkToEnable()) {
+                    //set confirmation button clickable
+                    btnConfirmation.setEnabled(true);
+                } else {
+                    btnConfirmation.setEnabled(false);
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        cardNameLocal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                cardNameCount = charSequence.length();
+                if (buttonOkToEnable()) {
+                    //set confirmation button clickable
+                    btnConfirmation.setEnabled(true);
+                } else {
+                    btnConfirmation.setEnabled(false);
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        expiryDateLocal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                expiryDateCount = charSequence.length();
+                if (buttonOkToEnable()) {
+                    //set confirmation button clickable
+                    btnConfirmation.setEnabled(true);
+                } else {
+                    btnConfirmation.setEnabled(false);
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+    }
 
+
+    public void saveCreditCardPay () {
         if(cbSaveCard.isChecked()) {
-
             String cardNumber = creditCardView.getCardNumber();
             String cardName = creditCardView.getCardName();
             String expiryDate = creditCardView.getExpiryDate();
             savedCard = new CreditCard(cardNumber, expiryDate, cardName);
+            savedCard.setInfosaved(true);
             CreditCard.setInstance(savedCard);
             Log.d("Credit Card", "Credit Card info saved");
             Toast.makeText(this, "Credit Card info saved" , Toast.LENGTH_SHORT).show();
         }
-
-        btnConfirmation.setEnabled(true);
     }
 
     public void refreshCard(CreditCardView ccView) {
@@ -131,5 +215,4 @@ public class CheckoutActivity extends AppCompatActivity {
         cardNumberLocal.setText(ccView.getCardNumber());
         expiryDateLocal.setText(ccView.getExpiryDate());
     }
-
 }

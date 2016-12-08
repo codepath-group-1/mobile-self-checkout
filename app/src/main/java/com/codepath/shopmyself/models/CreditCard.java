@@ -10,11 +10,17 @@ public class CreditCard {
     public static void setInstance (CreditCard saveCard) {
         card = saveCard;
     }
-
+    public void setInfosaved(boolean infosaved) {
+        this.infosaved = infosaved;
+    }
+    public boolean isInfosaved() {
+        return infosaved;
+    }
 
     private String cardNumber;
     private String cardExpiry;
     private String cardName;
+    private boolean infosaved;
 
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
