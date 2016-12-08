@@ -15,6 +15,19 @@
 
 
     <TextView
+        android:id="@+id/tvReceiptItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item Name"
+        android:textSize="12dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_toRightOf="@id/ivReceiptItemImage"/>
+
+
+
+    <TextView
         android:id="@+id/tvReceiptNumberOf"
         android:text="1"
         android:layout_toRightOf="@id/tvReceiptItemName"
@@ -24,6 +37,7 @@
         android:textColor="@color/black"
         android:layout_marginLeft="50dp"
         android:layout_marginStart="50dp"/>
+
 
     <TextView
         android:id="@+id/tvReceiptItemPrice"
@@ -36,16 +50,5 @@
         android:layout_marginLeft="120dp"
         android:layout_marginStart="120dp"
         android:layout_alignParentTop="true" />
-
-    <TextView
-        android:id="@+id/tvReceiptItemName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Item Name"
-        android:textSize="12dp"
-        android:textColor="@color/black"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_toRightOf="@id/ivReceiptItemImage"/>
 
 </RelativeLayout>
