@@ -59,7 +59,7 @@ public class CheckoutActivity extends AppCompatActivity {
         tvTotalPrice = (TextView) findViewById(R.id.tvTotalAmount);
 
         //set total price in text view
-        tvTotalPrice.setText(String.format("%.2f", total));
+        tvTotalPrice.setText(String.format("$%.2f", total));
 
         creditCardView = (CreditCardView) findViewById(R.id.card_name1);
         cardNameLocal = (EditText) findViewById(com.vinaygaba.creditcardview.R.id.card_name);
@@ -80,6 +80,8 @@ public class CheckoutActivity extends AppCompatActivity {
             creditCardView.setType(CardType.VISA);
             refreshCard(creditCardView);
         }
+
+
     }
 
     public void saveCreditCardPay (View v) {
