@@ -13,8 +13,7 @@
         android:contentDescription="Cart item image"
         android:id="@+id/ivCartItemImage"
         app:srcCompat="@mipmap/ic_launcher"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/border" />
+        android:layout_alignParentLeft="true" />
 
     <ImageButton
         android:layout_width="40dp"
