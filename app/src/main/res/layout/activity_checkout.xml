@@ -117,14 +117,4 @@
       </RelativeLayout>
     </android.support.v7.widget.CardView>
 
-    <!-- <TextView
-        android:id="@+id/tvCheckout"
-        android:text="@string/checkout_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/card_number_text_size"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/appBarLayout4"
-        android:layout_marginBottom="10dp" /> -->
-
 </RelativeLayout>

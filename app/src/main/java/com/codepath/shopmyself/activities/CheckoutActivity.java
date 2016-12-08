@@ -1,5 +1,6 @@
 package com.codepath.shopmyself.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -56,6 +57,7 @@ public class CheckoutActivity extends AppCompatActivity {
         total = getIntent().getExtras().getDouble("total");
 
         btnConfirmation = (Button) findViewById(R.id.btnConfirmation);
+        btnConfirmation.setEnabled(false);
         tvTotalPrice = (TextView) findViewById(R.id.tvTotalAmount);
 
         //set total price in text view
@@ -82,6 +84,30 @@ public class CheckoutActivity extends AppCompatActivity {
         }
 
 
+        if(creditCardView != null && itemArrayList != null) {
+
+            //set confirmation button clickable
+            btnConfirmation.setEnabled(true);
+
+            //listen when confirmation button is clicked
+            confirmationListener();
+        }
+    }
+
+    public void confirmationListener() {
+        btnConfirmation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ReceiptActivity.class);
+                intent.putExtra("itemList", Parcels.wrap(itemArrayList));
+                Bundle bundle = new Bundle();
+                bundle.putDouble("total", total);
+                intent.putExtras(bundle);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
     }
 
     public void saveCreditCardPay (View v) {
@@ -96,6 +122,8 @@ public class CheckoutActivity extends AppCompatActivity {
             Log.d("Credit Card", "Credit Card info saved");
             Toast.makeText(this, "Credit Card info saved" , Toast.LENGTH_SHORT).show();
         }
+
+        btnConfirmation.setEnabled(true);
     }
 
     public void refreshCard(CreditCardView ccView) {

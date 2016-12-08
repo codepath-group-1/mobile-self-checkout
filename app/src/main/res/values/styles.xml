@@ -22,5 +22,5 @@
     <style name="AppTheme.SwipeFlingStyle">
         <item name="android:gravity">center</item>
     </style>
-    
+
 </resources>
