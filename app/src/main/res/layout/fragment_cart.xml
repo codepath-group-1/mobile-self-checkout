@@ -4,14 +4,27 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cvCartList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rlCheckout"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="2dp">
+
     <ListView
         android:id="@+id/lvCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:padding="10dp"
         android:scrollbars="none"
         android:layout_above="@+id/rlCheckout"/>
+
+    </android.support.v7.widget.CardView>
 
     <RelativeLayout
         android:id="@+id/rlCheckout"
@@ -19,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
 
+<!--
         <TextView
             android:text="Total: "
             android:layout_width="wrap_content"
@@ -35,13 +49,53 @@
             android:id="@+id/tvTotal"
             android:textSize="20sp"
             android:textColor="@color/black"/>
+-->
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cvCartTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            card_view:cardCornerRadius="10dp"
+            card_view:cardElevation="2dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:text="@string/Total_Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="25dp"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"/>
+
+                <TextView
+                    android:id="@+id/tvTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Total_Amount"
+                    android:layout_alignParentRight="true"
+                    android:textSize="25dp"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
 
         <Button
             android:id="@+id/btnCheckout"
             android:text="Checkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvTotal"
+            android:layout_below="@+id/cvCartTotal"
             android:background="@color/colorAccent"/>
 
     </RelativeLayout>
