@@ -17,6 +17,7 @@ import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.fragments.CartFragment;
 import com.codepath.shopmyself.fragments.ScannerFragment;
 import com.codepath.shopmyself.fragments.WishListFragment;
+import com.codepath.shopmyself.models.Item;
 import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -162,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
         //if user signs out
         if (id == R.id.action_logout) {
+            Item.clearFirebaseCart();
             mFirebaseAuth.signOut();
             loadLogInView();
         }
