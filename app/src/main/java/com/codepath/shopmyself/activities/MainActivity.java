@@ -15,7 +15,7 @@ import android.view.MenuItem;
 
 import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.fragments.CartFragment;
-import com.codepath.shopmyself.fragments.ScannerFragment;
+import com.codepath.shopmyself.fragments.HistoryFragment;
 import com.codepath.shopmyself.fragments.WishListFragment;
 import com.codepath.shopmyself.models.Item;
 import com.crashlytics.android.Crashlytics;
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 previousItemView = wishListItemView;
                 break;
             case R.id.action_history:
-                fragmentClass = ScannerFragment.class;
+                fragmentClass = HistoryFragment.class;
                 previousItemView = historyItemView;
                 break;
         }
