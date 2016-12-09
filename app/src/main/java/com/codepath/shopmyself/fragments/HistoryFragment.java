@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.widget.ListView;
 
-import com.codepath.shopmyself.adapters.WishListArrayAdapter;
+import com.codepath.shopmyself.adapters.HistoryListArrayAdapter;
 import com.codepath.shopmyself.models.Item;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,6 +37,7 @@ public class HistoryFragment extends Fragment {
 
         mUserId = mFirebaseUser.getUid();
 
+        //historyList = getListFromFirebase();
 
     }
 }

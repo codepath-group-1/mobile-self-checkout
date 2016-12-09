@@ -32,5 +32,8 @@
     <string name="Total_Number_Of"># of items:</string>
     <string name="receipt">RECEIPT</string>
     <string name="Total_Amount">$0.00</string>
+    <string name="Code_Path_Mart">CodePath Mart</string>
+    <string name="time">7:20</string>
+    <string name="day">12/8/2016</string>
 
 </resources>

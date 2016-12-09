@@ -1,7 +1,13 @@
 package com.codepath.shopmyself.adapters;
 
 
-public class HistoryListArrayAdapter {
+import android.widget.ArrayAdapter;
+
+import com.codepath.shopmyself.models.Item;
+
+import java.util.Date;
+
+public class HistoryListArrayAdapter extends ArrayAdapter<Date> {
 
 
 }
