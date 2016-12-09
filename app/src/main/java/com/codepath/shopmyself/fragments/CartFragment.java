@@ -35,6 +35,7 @@ public class CartFragment extends Fragment {
     CartItemsAdapter cartItemsAdapter;
     TextView tvTotal;
     Button checkoutButton;
+    private TextView tvListEmpty;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -76,6 +77,8 @@ public class CartFragment extends Fragment {
         tvTotal = (TextView)view.findViewById(R.id.tvTotal);
         lvCart = (ListView)view.findViewById(R.id.lvCart);
         checkoutButton = (Button) view.findViewById(R.id.btnCheckout);
+        tvListEmpty = (TextView)view.findViewById(R.id.tvListEmpty);
+        lvCart.setEmptyView(tvListEmpty);
         checkoutButton.setEnabled(false);
         lvCart.setAdapter(cartItemsAdapter);
     }
