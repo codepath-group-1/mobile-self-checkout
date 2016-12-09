@@ -18,6 +18,13 @@ import android.widget.Toast;
 import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.models.CreditCard;
 import com.codepath.shopmyself.models.Item;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.vinaygaba.creditcardview.CardType;
 import com.vinaygaba.creditcardview.CreditCardView;
 
@@ -50,6 +57,11 @@ public class CheckoutActivity extends AppCompatActivity {
     double total;
     int count;
 
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+
+    private DatabaseReference mDatabase;
+    private String mUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +70,12 @@ public class CheckoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_checkout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mUserId = mFirebaseUser.getUid();
 
         //getting cart information from intents
         itemArrayList = Parcels.unwrap(getIntent().getParcelableExtra("itemList"));
@@ -92,20 +110,30 @@ public class CheckoutActivity extends AppCompatActivity {
         // Listen for Confirmation Click
         setConfirmationListener();
 
-        savedCard = CreditCard.getInstance();
+        mDatabase.child("users").child(mUserId).child(CreditCard.key)
+                 .addListenerForSingleValueEvent(new ValueEventListener() {
+                     @Override
+                     public void onDataChange(DataSnapshot dataSnapshot) {
+                         if (dataSnapshot.hasChildren()) {
+                             savedCard = new CreditCard(dataSnapshot);
+
+                             Log.d("sup:", "savedCard name: " + savedCard.getCardName());
+                             creditCardView.setCardName(savedCard.getCardName());
+                             creditCardView.setCardNumber(savedCard.getCardNumber());
+                             creditCardView.setExpiryDate(savedCard.getCardExpiry());
+                             creditCardView.setType(CardType.VISA);
+                             cbSaveCard.setChecked(true);
+
+                             refreshCard(creditCardView);
+                         }
+                     }
+
+                     @Override
+                     public void onCancelled(DatabaseError databaseError) {
+                    }
+                 });
+
         cbSaveCard = (CheckBox) findViewById(R.id.cbSaveCard);
-
-        if(savedCard != null) {
-            Log.d("sup:", "savedCard name: " + savedCard.getCardName());
-            creditCardView.setCardName(savedCard.getCardName());
-            creditCardView.setCardNumber(savedCard.getCardNumber());
-            creditCardView.setExpiryDate(savedCard.getCardExpiry());
-            creditCardView.setType(CardType.VISA);
-            if(savedCard.isInfosaved())
-                cbSaveCard.setChecked(true);
-
-            refreshCard(creditCardView);
-        }
 
         if (buttonOkToEnable()) {
             //set confirmation button clickable
@@ -205,8 +233,7 @@ public class CheckoutActivity extends AppCompatActivity {
             String cardName = creditCardView.getCardName();
             String expiryDate = creditCardView.getExpiryDate();
             savedCard = new CreditCard(cardNumber, expiryDate, cardName);
-            savedCard.setInfosaved(true);
-            CreditCard.setInstance(savedCard);
+            savedCard.save();
             Log.d("Credit Card", "Credit Card info saved");
             Toast.makeText(this, "Credit Card info saved" , Toast.LENGTH_SHORT).show();
         }
