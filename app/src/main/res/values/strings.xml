@@ -35,5 +35,6 @@
     <string name="Code_Path_Mart">CodePath Mart</string>
     <string name="time">7:20</string>
     <string name="day">12/8/2016</string>
+    <string name="wish_list_empty">WishList is empty. Try scanning some items.</string>
 
 </resources>

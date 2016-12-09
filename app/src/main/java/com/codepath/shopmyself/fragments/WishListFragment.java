@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.adapters.WishListArrayAdapter;
@@ -26,6 +27,8 @@ import java.util.ArrayList;
 public class WishListFragment extends Fragment {
 
     private ListView lvWishList;
+    private TextView tvListEmpty;
+
     private ArrayList<Item> wishList;
     private WishListArrayAdapter wishListAdapter;
 
@@ -67,6 +70,9 @@ public class WishListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         lvWishList = (ListView)view.findViewById(R.id.lvWishList);
         lvWishList.setAdapter(wishListAdapter);
+
+        tvListEmpty = (TextView)view.findViewById(R.id.tvListEmpty);
+        lvWishList.setEmptyView(tvListEmpty);
 
         setupListViewListeners();
     }
