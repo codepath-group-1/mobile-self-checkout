@@ -26,7 +26,7 @@
     <string name="cart">Cart</string>
     <string name="scan_barode">Scan Barcode</string>
     <string name="move_to_cart">MOVE TO CART</string>
-    <string name="confirmation">Confirm</string>
+    <string name="confirmation">Confirm and Pay</string>
     <string name="checkout_title">Checkout</string>
     <string name="Total_Title">Total</string>
     <string name="Total_Number_Of"># of items:</string>
