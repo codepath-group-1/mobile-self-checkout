@@ -23,10 +23,20 @@ import android.widget.TextView;
 import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.adapters.ReceiptArrayAdapter;
 import com.codepath.shopmyself.models.Item;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.parceler.Parcels;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static android.graphics.Color.WHITE;
 
@@ -38,6 +48,13 @@ public class ReceiptActivity extends AppCompatActivity {
     TextView tvNumberOf;
     TextView tvTotalPrice;
     double total;
+    Map<String, List<Item>> map;
+
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+
+    private DatabaseReference mDatabase;
+    private String mUserId;
 
 
     @Override
@@ -47,6 +64,12 @@ public class ReceiptActivity extends AppCompatActivity {
         setContentView(R.layout.activity_receipt);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mUserId = mFirebaseUser.getUid();
 
         //getting cart information from intents
         items = Parcels.unwrap(getIntent().getParcelableExtra("itemList"));
@@ -69,8 +92,24 @@ public class ReceiptActivity extends AppCompatActivity {
         tvTotalPrice.setText(String.format("$%.2f", total));
 
 
+        //save items to firebase
+        DateFormat date = new SimpleDateFormat("MM-dd-yy HH:mm");
+        Date dateobj = new Date();
+        String d = date.format(dateobj).toString();
+        map = new HashMap<>();
+        map.put(d, items);
+
+        saveToFireBase(d);
+
         //call ballon animation
        balloonAnimator(ivBalloons);
+    }
+
+
+    private void saveToFireBase(String date) {
+        if(map != null) {
+            mDatabase.child("users").child(mUserId).child("receipt").child(date).setValue(map);
+        }
     }
 
     @Override
@@ -101,6 +140,7 @@ public class ReceiptActivity extends AppCompatActivity {
     public void onCloseReceipt(MenuItem mi) {
         // clear cart
         Item.clearFirebaseCart();
+
         //go back to main activity
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
