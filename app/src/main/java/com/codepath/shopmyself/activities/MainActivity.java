@@ -15,7 +15,6 @@ import android.view.MenuItem;
 
 import com.codepath.shopmyself.R;
 import com.codepath.shopmyself.fragments.CartFragment;
-import com.codepath.shopmyself.fragments.HistoryFragment;
 import com.codepath.shopmyself.fragments.WishListFragment;
 import com.codepath.shopmyself.models.Item;
 import com.crashlytics.android.Crashlytics;
@@ -82,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
                            .findViewById(R.id.action_cart);
             wishListItemView = (BottomNavigationItemView)bottomNavigationView
                                .findViewById(R.id.action_wish_list);
-            historyItemView = (BottomNavigationItemView)bottomNavigationView
-                              .findViewById(R.id.action_history);
+           // historyItemView = (BottomNavigationItemView)bottomNavigationView
+             //                 .findViewById(R.id.action_history);
             previousItemView = cartItemView;
             cartItemView.performClick();
         }
@@ -114,10 +113,10 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = WishListFragment.class;
                 previousItemView = wishListItemView;
                 break;
-            case R.id.action_history:
+            /*case R.id.action_history:
                 fragmentClass = HistoryFragment.class;
                 previousItemView = historyItemView;
-                break;
+                break;*/
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
