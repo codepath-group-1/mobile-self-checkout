@@ -17,4 +17,12 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"/>
 
+    <TextView
+        android:text ="@string/wish_list_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tvListEmpty"
+        android:gravity="center"
+        android:visibility="gone"/>
+
 </RelativeLayout>
