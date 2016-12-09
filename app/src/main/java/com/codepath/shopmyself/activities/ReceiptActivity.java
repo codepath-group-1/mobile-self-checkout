@@ -2,6 +2,7 @@ package com.codepath.shopmyself.activities;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -98,7 +99,14 @@ public class ReceiptActivity extends AppCompatActivity {
 
 
     public void onCloseReceipt(MenuItem mi) {
-        // handle click here
+        // clear cart
+        Item.clearFirebaseCart();
+        //go back to main activity
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+
     }
 
     private void balloonAnimator(View view) {
