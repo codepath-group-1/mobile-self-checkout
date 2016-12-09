@@ -10,14 +10,12 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.animation.TranslateAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.codepath.shopmyself.R;
@@ -52,7 +50,6 @@ public class ReceiptActivity extends AppCompatActivity {
         items = Parcels.unwrap(getIntent().getParcelableExtra("itemList"));
         total = getIntent().getExtras().getDouble("total");
 
-
         ReceiptArrayAdapter itemsAdapter = new ReceiptArrayAdapter(this, items);
 
         // Attach the adapter to a ListView
@@ -62,15 +59,11 @@ public class ReceiptActivity extends AppCompatActivity {
         tvNumberOf = (TextView) findViewById(R.id.tvReceiptTotalNumberOf);
         tvTotalPrice = (TextView) findViewById(R.id.tvReceiptPrice);
 
-        ivBalloons = (ImageView) findViewById(R.id.ivBalloons);
-        ivBalloons.setVisibility(View.INVISIBLE); //set ballons to invisible at first
-
         tvNumberOf.setText(String.valueOf(items.size()));
         tvTotalPrice.setText(String.format("$%.2f", total));
 
-
-        //call ballon animation
-       balloonAnimator(ivBalloons);
+        ivBalloons = (ImageView) findViewById(R.id.ivBalloons);
+        startBalloonAnimator(ivBalloons);
     }
 
     @Override
@@ -109,25 +102,12 @@ public class ReceiptActivity extends AppCompatActivity {
 
     }
 
-    private void balloonAnimator(View view) {
-        RelativeLayout root = (RelativeLayout) findViewById( R.id.root_layout_receipt);
-        DisplayMetrics dm = new DisplayMetrics();
-        this.getWindowManager().getDefaultDisplay().getMetrics( dm );
-        int statusBarOffset = dm.heightPixels - root.getMeasuredHeight();
-
-        int originalPos[] = new int[2];
-        view.getLocationOnScreen( originalPos );
-
-        int xDest = dm.widthPixels;
-        xDest -= (view.getMeasuredWidth());
-        int yDest = dm.heightPixels - (view.getMeasuredHeight()) - statusBarOffset;
-
-        TranslateAnimation animate = new TranslateAnimation( 0, xDest - originalPos[0] , 0, yDest - originalPos[1] );
-        animate.setDuration(1000);
-        animate.setFillAfter( true );
-        ivBalloons.setVisibility(View.VISIBLE);
-        ivBalloons.startAnimation(animate);
-        ivBalloons.setVisibility(View.GONE);
+    private void startBalloonAnimator(final ImageView balloons) {
+        animWobbleBalloon(balloons);
     }
 
+    public void animWobbleBalloon (ImageView balloon) {
+        final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.wobble2);
+        balloon.startAnimation(animShake);
+    }
 }
