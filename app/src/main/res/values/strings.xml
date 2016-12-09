@@ -30,7 +30,7 @@
     <string name="checkout_title">Checkout</string>
     <string name="Total_Title">Total</string>
     <string name="Total_Number_Of"># of items:</string>
-    <string name="receipt">Your receipt</string>
+    <string name="receipt">Payment Successful. Your receipt</string>
     <string name="Total_Amount">$0.00</string>
     <string name="Code_Path_Mart">CodePath Mart</string>
     <string name="time">7:20</string>

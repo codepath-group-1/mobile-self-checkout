@@ -2,6 +2,7 @@ package com.codepath.shopmyself.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -152,19 +153,32 @@ public class CheckoutActivity extends AppCompatActivity {
         return false;
     }
 
+    public void launchActivity(View v) {
+        Intent intent = new Intent(getApplicationContext(), ReceiptActivity.class);
+        intent.putExtra("itemList", Parcels.wrap(itemArrayList));
+        Bundle bundle = new Bundle();
+        bundle.putDouble("total", total);
+        intent.putExtras(bundle);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+
     public void setConfirmationListener() {
         btnConfirmation.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 saveCreditCardPay();
-                Intent intent = new Intent(getApplicationContext(), ReceiptActivity.class);
-                intent.putExtra("itemList", Parcels.wrap(itemArrayList));
-                Bundle bundle = new Bundle();
-                bundle.putDouble("total", total);
-                intent.putExtras(bundle);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        launchActivity(view);
+                    }
+                }, 3000);
+
+
             }
         });
     }
@@ -236,6 +250,7 @@ public class CheckoutActivity extends AppCompatActivity {
             savedCard.save();
             Log.d("Credit Card", "Credit Card info saved");
             Toast.makeText(this, "Credit Card info saved" , Toast.LENGTH_SHORT).show();
+            btnConfirmation.setText("Processing payment. Please wait");
         }
     }
 
