@@ -19,24 +19,13 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/receipt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:text="@string/receipt"
-        android:layout_below="@+id/appBarLayout4"
-        android:layout_marginLeft="120dp"
-        android:layout_marginStart="120dp"/>
-
 
     <ListView
         android:id="@+id/lvReceipt"
         android:layout_width="match_parent"
         android:layout_height="310dp"
         android:layout_below="@+id/receipt"
+        android:layout_above="@+id/cvTotalTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="5dp"
@@ -47,68 +36,129 @@
     <android.support.percent.PercentRelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/prlBaloons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
 
-    <ImageView
-        android:id="@+id/ivBalloons"
-        android:layout_width="wrap_content"
-        app:layout_heightPercent="30%"
-        app:srcCompat="@drawable/balloons"/>
+        <ImageView
+            android:id="@+id/ivBalloons"
+            android:layout_width="wrap_content"
+            app:layout_heightPercent="30%"
+            app:srcCompat="@drawable/balloons"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
     </android.support.percent.PercentRelativeLayout>
 
-    <TextView
-        android:id="@+id/tvReceiptPriceTitle"
-        android:layout_width="wrap_content"
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        android:gravity="center"
-        android:text="@string/Total_Title"
-        android:layout_below="@id/lvReceipt"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp"/>
+        android:layout_above="@+id/prlBaloons"
+        android:id="@+id/cvTotalTitle"
+        android:layout_margin="10dp"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tvReceiptPriceTitle"
+            android:text="@string/Total_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/tvReceiptPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Total_Amount"
+            android:layout_alignParentRight="true"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"/>
+
+        </RelativeLayout>
+
+
+        <!--
+                <TextView
+                    android:id="@+id/tvReceiptPriceTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lvReceipt"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:gravity="center"
+                    android:text="@string/Total_Title"
+                    android:textColor="@color/black"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/tvReceiptPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lvReceipt"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginStart="80dp"
+                    android:layout_toRightOf="@+id/tvReceiptPriceTitle"
+                    android:gravity="center"
+                    android:text="$0.00"
+                    android:textColor="@color/black"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/tvReceiptTotalNumberOfTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvReceiptPriceTitle"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:gravity="center"
+                    android:text="@string/Total_Number_Of"
+                    android:textColor="@color/black"
+                    android:textSize="25dp" />
+
+
+                <TextView
+                    android:id="@+id/tvReceiptTotalNumberOf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvReceiptPrice"
+                    android:layout_marginLeft="65dp"
+                    android:layout_marginStart="65dp"
+                    android:layout_toRightOf="@id/tvReceiptTotalNumberOfTitle"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/black"
+                    android:textSize="25dp" />
+        -->
+
+    </android.support.v7.widget.CardView>
 
     <TextView
-        android:id="@+id/tvReceiptPrice"
+        android:id="@+id/receipt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="$0.00"
-        android:textSize="25dp"
-        android:gravity="center"
+        android:textSize="30dp"
         android:textColor="@color/black"
-        android:layout_toRightOf="@+id/tvReceiptPriceTitle"
-        android:layout_below="@id/lvReceipt"
-        android:layout_marginLeft="80dp"
-        android:layout_marginStart="80dp"/>
-
-    <TextView
-        android:id="@+id/tvReceiptTotalNumberOfTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25dp"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:text="@string/Total_Number_Of"
-        android:layout_below="@id/tvReceiptPriceTitle"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp"/>
-
-
-    <TextView
-        android:id="@+id/tvReceiptTotalNumberOf"
-        android:text="1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:layout_marginLeft="65dp"
-        android:layout_marginStart="65dp"
-        android:layout_toRightOf="@id/tvReceiptTotalNumberOfTitle"
-        android:layout_below="@id/tvReceiptPrice"/>
+        android:padding="5dp"
+        android:text="@string/receipt"
+        android:layout_below="@+id/appBarLayout4"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
 

@@ -33,7 +33,6 @@ public class ReceiptActivity extends AppCompatActivity {
     ImageView ivBalloons;
     RecyclerView rvReceipt;
     ArrayList<Item> items;
-    TextView tvNumberOf;
     TextView tvTotalPrice;
     double total;
 
@@ -56,11 +55,9 @@ public class ReceiptActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.lvReceipt);
         listView.setAdapter(itemsAdapter);
 
-        tvNumberOf = (TextView) findViewById(R.id.tvReceiptTotalNumberOf);
-        tvTotalPrice = (TextView) findViewById(R.id.tvReceiptPrice);
 
-        tvNumberOf.setText(String.valueOf(items.size()));
-        tvTotalPrice.setText(String.format("$%.2f", total));
+        tvTotalPrice = (TextView) findViewById(R.id.tvReceiptPrice);
+        tvTotalPrice.setText("(" + items.size() + " Items) " + String.format("$%.2f", total));
 
         ivBalloons = (ImageView) findViewById(R.id.ivBalloons);
         startBalloonAnimator(ivBalloons);
